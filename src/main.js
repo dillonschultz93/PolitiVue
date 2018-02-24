@@ -1,7 +1,7 @@
 import Vue from 'vue'
-import Nav from './App.vue'
+import App from './App.vue'
 
 new Vue({
   el: '#app',
-  render: h => h(Nav)
+  render: h => h(App)
 })
