@@ -33,7 +33,6 @@
   .nav-container {
     align-items: center;
     display: flex;
-    // lost-align: vertical;
     lost-center: 980px 0 flex;
     height: 58px;
     justify-content: space-between;
