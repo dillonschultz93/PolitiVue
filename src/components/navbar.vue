@@ -1,7 +1,11 @@
 <template>
   <div id="navbar">
     <div class="nav-container">
-      <h3 class="logotype">PolitiVue</h3>
+      <div class="brand">
+        <img src="../assets/logo.svg" class="brandmark">
+        <h3 class="logotype">PolitiVue</h3>
+      </div>
+      
       <div class="nav-items">
         <a href="#" class="sign-in">Sign In or Create an Account</a>
       </div>
@@ -21,19 +25,28 @@
   @import "../scss/components/_colors";
 
   #navbar {
-    border-bottom: 2px solid $gray;
+    border-bottom: 2px solid $red-secondary;
     height: 58px;
-    position: fixed;
     width: 100%;
   }
   
   .nav-container {
     align-items: center;
     display: flex;
-    // lost-align: vertical;
     lost-center: 980px 0 flex;
     height: 58px;
     justify-content: space-between;
+  }
+  
+  .brand {
+    align-items: center;
+    display: flex;
+  }
+  
+  .brandmark {
+    width: $heading-3-size;
+    height: $heading-3-size;
+    margin-right: 15px;
   }
   
   .logotype {
@@ -55,7 +68,7 @@
     display: block;
     width: 0;
     height: 2px;
-    background: $blue-primary;
+    background: $red-secondary;
     transition: width .3s;
   }
 
