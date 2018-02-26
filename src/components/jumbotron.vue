@@ -26,10 +26,12 @@
   
   .jumbotron-container {
     align-items: center;
-    background-color: #e3e6e6;
+    background-image: url('../assets/jumbo-bg.jpg');
+    background-position: center;
+    background-size: cover;
     display: flex;
     justify-content: center;
-    height: 50vh;
+    height: 94vh;
     margin: 0;
     width: 100%;
   }
@@ -42,9 +44,11 @@
   }
   
   .tagline {
+    color: $red-darkShade;
     font-family: $heading-font;
-    font-size: $heading-1-size;
+    font-size: 5em;
     line-height: $primary-leading;
+    opacity: 0.75;
     text-align: center;
   }
   
