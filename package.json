@@ -1,0 +1,27 @@
+{
+  "name": "politivue",
+  "version": "1.0.0",
+  "description": "A web app that tracks local politics",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dillonschultz93/PolitiVue.git"
+  },
+  "author": "Caleb Harshman <caleb.harsh139@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dillonschultz93/PolitiVue/issues"
+  },
+  "homepage": "https://github.com/dillonschultz93/PolitiVue#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "mysql2": "^1.5.2",
+    "sequelize": "^4.34.0"
+  }
+}
