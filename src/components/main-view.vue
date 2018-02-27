@@ -1,8 +1,10 @@
 <template>
   <div id="mainVeiw">
     <div class="yourReps">
+      
       <ul>
-        <li v-for="(data, index) in results" :key='index'>{{data.name}} {{data.party}} {{data.state}} {{data.phone}}</li>
+        <h3>Your Representatives</h3>
+        <li v-for="(data, index) in results" :key='index'>{{data.name}}, {{data.party}}, {{data.state}}</li>
       </ul>  
     </div>
 
@@ -50,6 +52,24 @@
                   "phone": "202-224-2235",
                   "office": "218 Russell Senate Office Building Washington DC 20510",
                   "link": "http://www.mccain.senate.gov"
+                  },
+                  {
+                  "name": "Frank Underwood",
+                  "party": "Democrat",
+                  "state": "GA",
+                  "district": "",
+                  "phone": "202-224-2235",
+                  "office": "218 Russell Senate Office Building Washington DC 20510",
+                  "link": "http://www.mccain.senate.gov"
+                  },
+                  {
+                  "name": "Hillary Clinton",
+                  "party": "Democrat",
+                  "state": "NY",
+                  "district": "",
+                  "phone": "202-224-2235",
+                  "office": "218 Russell Senate Office Building Washington DC 20510",
+                  "link": "http://www.mccain.senate.gov"
                   }
                   ]
                   
@@ -69,9 +89,10 @@
   }
   #mainVeiw {
       display: grid;
-      grid-template-columns: 40% 60%; 
+      grid-template-columns: 35% 65%; 
       width: 90%;
-      margin: auto;   
+      margin: auto;
+      height: 100%;  
   }
 
   .yourReps {
@@ -92,10 +113,16 @@
   ul li {
     padding: 20px;
     font-size: 1.3em;
-    background-color: $blue-lightShade;
-    border-left: 5px solid $blue-darkestShade;
-    margin-bottom: 2px;
+    font-family: $primary-font;
+    background-color: $white;
+    border-left: 5px solid $blue-primary;
+    margin-bottom: 4px;
     color: $black;
+  }
+  h3 {
+    font-size: $heading-3-size;
+    font-weight: $heavy-weight;
+    font-family: $heading-font;
   }
   
   
