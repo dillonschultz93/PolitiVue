@@ -3,7 +3,7 @@ const federal = require("./federalAPI.js")
 const api = {
   federal: {
     getHome: function () {
-      return federal.test()
+      return federal.getUpcomingElections()
     },
 
     getRepsByZip: function (zip) {
