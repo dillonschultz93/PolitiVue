@@ -38,9 +38,19 @@
   }
   #mainVeiw {
       display: grid;
-      
+      grid-template-columns: 30% 70%; 
+      width: 90%;     
   }
-  
+
+  .yourReps {
+      grid-column: 1/2;
+      padding: 1em;
+  }
+
+  .repMap {
+      grid-column: 2/3;
+      padding: 1em;
+  }
   
   
 </style>
