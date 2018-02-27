@@ -4,12 +4,19 @@
       <div class="text-container">
         <h1 class="tagline">Some Text About <br>How Great This App Is</h1>
       </div>
+      <Searchbar />
     </div>
   </div>
 </template>
 
 <script>
+
+  import Searchbar from './search-bar.vue'
+  
   export default {
+    components: {
+      'Searchbar': Searchbar
+    },
     name: 'jumbotron'
   }
 </script>
@@ -30,6 +37,7 @@
     background-position: center;
     background-size: cover;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     height: 94vh;
     margin: 0;
@@ -40,6 +48,7 @@
     display: flex;
     justify-content: center;
     lost-center: 980px 0 flex;
+    // lost-column: 1/1;
     
   }
   
