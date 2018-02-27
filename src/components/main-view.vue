@@ -1,14 +1,16 @@
 <template>
   <div id="mainVeiw">
     <div class="yourReps">
-
+      <ul>
+        <li v-for="(data, index) in results" :key='index'>{{data.name}} {{data.party}} {{data.state}} {{data.phone}}</li>
+      </ul>  
     </div>
 
     <div class="repMap">
-        <img src="https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap
+        <!-- <img src="https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap
             &markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318
             &markers=color:red%7Clabel:C%7C40.718217,-73.998284
-            &key=AIzaSyCTM6kafG8RQwi0qStGmMMqwK30VV52Enc" alt="google static map">
+            &key=AIzaSyCTM6kafG8RQwi0qStGmMMqwK30VV52Enc" alt="google static map"> -->
     </div>
   </div>
 </template>
@@ -20,9 +22,38 @@
   export default {
     name: 'mainVeiw',  
     data() {
-        return {
-            
-        }
+        return {                  
+                results: [
+                  {
+                  "name": "Martha McSally",
+                  "party": "Republican",
+                  "state": "AZ",
+                  "district": "2",
+                  "phone": "202-225-2542",
+                  "office": "510 Cannon HOB; Washington DC 20515-0302",
+                  "link": "https://mcsally.house.gov"
+                  },
+                  {
+                  "name": "Jeff Flake",
+                  "party": "Republican",
+                  "state": "AZ",
+                  "district": "",
+                  "phone": "202-224-4521",
+                  "office": "413 Russell Senate Office Building Washington DC 20510",
+                  "link": "http://www.flake.senate.gov/public"
+                  },
+                  {
+                  "name": "John McCain",
+                  "party": "Republican",
+                  "state": "AZ",
+                  "district": "",
+                  "phone": "202-224-2235",
+                  "office": "218 Russell Senate Office Building Washington DC 20510",
+                  "link": "http://www.mccain.senate.gov"
+                  }
+                  ]
+                  
+              }
     }
   }
 </script>
@@ -38,8 +69,9 @@
   }
   #mainVeiw {
       display: grid;
-      grid-template-columns: 30% 70%; 
-      width: 90%;     
+      grid-template-columns: 40% 60%; 
+      width: 90%;
+      margin: auto;   
   }
 
   .yourReps {
@@ -50,6 +82,20 @@
   .repMap {
       grid-column: 2/3;
       padding: 1em;
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  
+  ul li {
+    padding: 20px;
+    font-size: 1.3em;
+    background-color: $blue-lightShade;
+    border-left: 5px solid $blue-darkestShade;
+    margin-bottom: 2px;
+    color: $black;
   }
   
   
