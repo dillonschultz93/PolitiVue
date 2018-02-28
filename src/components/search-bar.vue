@@ -1,15 +1,26 @@
 <template>
   <div id="search-bar">
     <div class="input-container">
-      <input id ="zip-code" type="text" name="zip-code" placeholder="Enter Your Zip Code">
-      <button id="search-zip" type="button">Find Your Representatives</button>
+      <auto-comp id="zip-code" :placeholder="placeHolder"></auto-comp>
+      <button  id="search-zip" type="button">Find Your Representatives</button>
     </div>
   </div>
 </template>
 
 <script>
+
+  import autoComp from "./helpers/autoComp.vue"
+  
   export default {
-    name: 'search-bar'
+    name: 'search-bar',
+    data(){
+      return {
+        placeHolder: "Address"
+      }
+    },
+    components: {
+      autoComp: autoComp
+    }
   }
 </script>
 
