@@ -15,7 +15,7 @@
     name: 'search-bar',
     data(){
       return {
-        placeHolder: "Address"
+        placeHolder: "Enter Your Address"
       }
     },
     components: {
