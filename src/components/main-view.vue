@@ -20,10 +20,6 @@
 </template>
 
 <script>
-
-  import Profile from "./profiles/card.vue"
-
-  
   
   export default {
     name: 'mainVeiw',  
@@ -78,9 +74,6 @@
                   ]
                   
               }
-    },
-    components :{
-      Profile
     }
   }
 </script>

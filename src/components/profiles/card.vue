@@ -1,27 +1,20 @@
 <template>
-  <div id="rep-profile">
+
+  <div id="cards">
     <div class="container">
       
         <div class="row">
-            <div class="col-4 border">Picture Placeholder</div>
-            <div class="col-8 border">Name</div>
-        </div>
-
-        <div class="row">
-            <div class="col"> Placeholder </div>
-        </div>
-
-        <div class="row">
-            <div class="col"> Placeholder </div>
-        </div>
-            
+            <div class="col-4"> <img src="../../assets/placeholder.png" alt="Placeholder"></div>
+            <div class="col-8">Representative Name</div>
+        </div> 
     </div>
   </div>
+
 </template>
 
 <script>
   export default {
-    name: 'rep-profile'
+    name: 'cards'
   }
 </script>
 

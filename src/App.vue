@@ -4,6 +4,7 @@
       <Jumbo />
       <Main />
       <Footer />
+      <Profile />
   </div>
 </template>
 
@@ -12,7 +13,7 @@ import Nav from "./components/navbar.vue"
 import Jumbo from "./components/jumbotron.vue"
 import Main from "./components/main-view.vue"
 import Footer from "./components/footer.vue"
-import Profile from "./components/profiles/card.vue"
+import Profile from "./components/profiles/profile.vue"
 
 export default {
   name: 'app',
@@ -20,8 +21,7 @@ export default {
     Nav,
     Jumbo,
     Main,
-    Footer,
-    Profile
+    Footer
   }
 }
 </script>
