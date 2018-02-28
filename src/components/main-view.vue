@@ -5,8 +5,10 @@
       <ul>
         <h3>Your Representatives</h3>
         <li v-for="(data, index) in results" :key='index'>{{data.name}}, {{data.party}}, {{data.state}}</li>
-      </ul>  
+      </ul>
     </div>
+
+    <Profile />
 
     <div class="repMap">
         <!-- <img src="https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap
@@ -18,6 +20,8 @@
 </template>
 
 <script>
+
+  import Profile from "./profiles/card.vue"
 
   
   
@@ -74,6 +78,9 @@
                   ]
                   
               }
+    },
+    components :{
+      Profile
     }
   }
 </script>
