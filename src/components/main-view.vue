@@ -4,7 +4,7 @@
       
       <ul>
         <h3>Your Representatives</h3>
-        <li v-for="(data, index) in results" :key='index'>{{data.name}}, {{data.party}}, {{data.state}}</li>
+        <li v-for="(data, index) in results" :key='index'>{{data.name}}, {{data.state}}, {{data.party}}</li>
       </ul>  
     </div>
 
@@ -71,9 +71,18 @@
                   "office": "218 Russell Senate Office Building Washington DC 20510",
                   "link": "http://www.mccain.senate.gov"
                   }
-                  ]
+                  ],
+                  
                   
               }
+    },
+    methods:{
+        getParty(){
+           return {
+            'republican': this.data.party['republican'],  
+            'democrat': !this.data.party['republican']
+            }
+          }
     }
   }
 </script>
@@ -123,6 +132,11 @@
     font-size: $heading-3-size;
     font-weight: $heavy-weight;
     font-family: $heading-font;
+    color: $blue-primary;
+  }
+
+  .party {
+    border-left: 5px solid $red-darkestShade;
   }
   
   
