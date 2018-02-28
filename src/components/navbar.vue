@@ -7,7 +7,8 @@
       </div>
       
       <div class="nav-items">
-        <a href="#" class="sign-in">Sign In or Create an Account</a>
+        <a href="#" class="sign-in">Sign In</a>
+        <a href="#" class="create-account">Create an Account</a>
       </div>
     </div>
   </div>
@@ -56,11 +57,17 @@
     margin: 0;
   }
   
+  .nav-items {
+    display: flex;
+    flex-direction: row;
+  }
+  
   .sign-in {
     font-family: $primary-font;
     font-size: $paragraph;
     color: $blue-primary;
     text-decoration: none;
+    margin-right: 15px;
   }
   
   .sign-in::after {
@@ -73,6 +80,26 @@
   }
 
   .sign-in:hover::after {
+    width: 100%;
+  }
+  
+  .create-account {
+    font-family: $primary-font;
+    font-size: $paragraph;
+    color: $blue-primary;
+    text-decoration: none;
+  }
+  
+  .create-account::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: $red-secondary;
+    transition: width .3s;
+  }
+
+  .create-account:hover::after {
     width: 100%;
   }
   
