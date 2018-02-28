@@ -19,4 +19,10 @@ router.get("/home/:zip", (req, res) => {
   }).catch(err => console.error(err))
 })
 
+router.get("/elections", (req, res) => {
+  api.federal.getElections().then(results => {
+    res.json(results.data)
+  })
+})
+
 module.exports = router
