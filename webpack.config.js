@@ -69,8 +69,8 @@ module.exports = {
         loader: 'file-loader',
         options: {
           name: '[name].[ext]?[hash]',
-          publicPath: 'assets/',
-          outputPath: 'assets/'
+          outputPath: 'assets/',
+          publicPath: 'assets/'
         }
       }
     ]
@@ -82,6 +82,7 @@ module.exports = {
     extensions: ['*', '.js', '.vue', '.json']
   },
   devServer: {
+    contentBase: path.join(__dirname, 'dist'),
     historyApiFallback: true,
     noInfo: true,
     overlay: true
