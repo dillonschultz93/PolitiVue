@@ -9,7 +9,7 @@
 
 <script>
 
-  import autoComp from "./helpers/autoComp.vue"
+  // import autoComp from "./helpers/autoComp.vue"
   import axios from 'axios';
   
   export default {
@@ -22,15 +22,22 @@
     },
     methods: {
       getReps: function() {
+        let apiReturn = []
         axios.get(`home/${this.address}`)
              .then(function(response){
-               console.log(response.data)
+               return response.data.officials
+             }).then(function(response){
+               return response.forEach(function(item){
+                 apiReturn.push(item)
+               })
+             }).then(function(response){
+               console.log(JSON.stringify(apiReturn, null, 2))
              })
       }
-    },
-    components: {
-      autoComp: autoComp
     }
+    // components: {
+    //   autoComp: autoComp
+    // }
   }
 </script>
 
