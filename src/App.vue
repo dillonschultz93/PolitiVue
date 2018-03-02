@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-      <Nav />
+      <!-- <Nav />
       <Jumbo />
       <Main />
-      <Footer />
+      <Footer /> -->
       <Profile />
   </div>
 </template>
@@ -18,10 +18,11 @@ import Profile from "./components/profiles/profile.vue"
 export default {
   name: 'app',
   components: {
-    Nav,
-    Jumbo,
-    Main,
-    Footer
+    // Nav,
+    // Jumbo,
+    // Main,
+ 
+  Profile
   }
 }
 </script>
