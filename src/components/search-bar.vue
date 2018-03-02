@@ -15,7 +15,7 @@
     name: 'search-bar',
     data(){
       return {
-        placeHolder: "Address"
+        placeHolder: "Enter Your Address"
       }
     },
     components: {
@@ -24,7 +24,7 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   @import "../scss/components/normalize";
   @import "../scss/components/_typography";
   @import "../scss/components/_colors";
