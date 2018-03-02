@@ -12,20 +12,21 @@
     </div>
 
     <div class="repMap">
-        <!-- <img src="https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap
-            &markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318
-            &markers=color:red%7Clabel:C%7C40.718217,-73.998284
-            &key=AIzaSyCTM6kafG8RQwi0qStGmMMqwK30VV52Enc" alt="google static map"> -->
+        <gmap-map />
     </div>
   </div>
 </template>
 
 <script>
-
+  import gmapMap from "./helpers/gooMap.vue"
   
   
   export default {
-    name: 'mainVeiw',  
+    name: 'mainVeiw', 
+    components: {
+      gmapMap
+    },
+
     data() {
         return {                  
                 officials: [
@@ -420,6 +421,7 @@
   .repMap {
       grid-column: 2/3;
       padding: 1em;
+      height: 500px;
   }
   ul {
     margin: 0;
