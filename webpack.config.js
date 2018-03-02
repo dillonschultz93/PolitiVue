@@ -82,10 +82,19 @@ module.exports = {
     extensions: ['*', '.js', '.vue', '.json']
   },
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    contentBase: [__dirname, path.join(__dirname, 'dist')],
+    index: 'index.html',
+    port: 3030,
+    proxy: {
+      "/home": {
+        target: "http://localhost:3000",
+        changeOrigin: true
+      }
+    },
     historyApiFallback: true,
     noInfo: true,
-    overlay: true
+    overlay: true,
+    watchContentBase: true
   },
   performance: {
     hints: false
