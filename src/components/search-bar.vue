@@ -24,7 +24,7 @@
       getReps: function() {
         axios.get(`home/${this.address}`)
              .then(function(response){
-               console.log(response)
+               console.log(response.data)
              })
       }
     },
