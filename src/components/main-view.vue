@@ -1,394 +1,89 @@
 <template>
   <div id="mainVeiw">
     <div class="yourReps">
-      <h3>Your Representatives</h3>
-      <div id="repCard">
-        <ul>
-                    
-          <li v-for="(data, index) in officials.slice(0,4)" :key='index' :class="getParty(data)"><img id="repImg" v-bind:src="data.photoUrl"><div id="centerRep">{{data.name}}, {{data.address[0].state}}</div></li>
-          
-        </ul> 
-      </div> 
+      
+      <ul>
+        <h3>Your Representatives</h3>
+        <li v-for="(data, index) in results" :key='index'>{{data.name}}, {{data.state}}, {{data.party}}</li>
+      </ul>  
     </div>
 
     <div class="repMap">
-        <gmap-map />
+        <!-- <img src="https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap
+            &markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318
+            &markers=color:red%7Clabel:C%7C40.718217,-73.998284
+            &key=AIzaSyCTM6kafG8RQwi0qStGmMMqwK30VV52Enc" alt="google static map"> -->
     </div>
   </div>
 </template>
 
 <script>
-  import gmapMap from "./helpers/gooMap.vue"
+
   
   
   export default {
-    name: 'mainVeiw', 
-    components: {
-      gmapMap
-    },
-
+    name: 'mainVeiw',  
     data() {
         return {                  
-                officials: [
-              {
-              "name": "Donald J. Trump",
-              "address": [
-              {
-              "line1": "The White House",
-              "line2": "1600 Pennsylvania Avenue NW",
-              "city": "Washington",
-              "state": "DC",
-              "zip": "20500"
+                results: [
+                  {
+                  "name": "Martha McSally",
+                  "party": "Republican",
+                  "state": "AZ",
+                  "district": "2",
+                  "phone": "202-225-2542",
+                  "office": "510 Cannon HOB; Washington DC 20515-0302",
+                  "link": "https://mcsally.house.gov"
+                  },
+                  {
+                  "name": "Jeff Flake",
+                  "party": "Republican",
+                  "state": "AZ",
+                  "district": "",
+                  "phone": "202-224-4521",
+                  "office": "413 Russell Senate Office Building Washington DC 20510",
+                  "link": "http://www.flake.senate.gov/public"
+                  },
+                  {
+                  "name": "John McCain",
+                  "party": "Republican",
+                  "state": "AZ",
+                  "district": "",
+                  "phone": "202-224-2235",
+                  "office": "218 Russell Senate Office Building Washington DC 20510",
+                  "link": "http://www.mccain.senate.gov"
+                  },
+                  {
+                  "name": "Frank Underwood",
+                  "party": "Democrat",
+                  "state": "GA",
+                  "district": "",
+                  "phone": "202-224-2235",
+                  "office": "218 Russell Senate Office Building Washington DC 20510",
+                  "link": "http://www.mccain.senate.gov"
+                  },
+                  {
+                  "name": "Hillary Clinton",
+                  "party": "Democrat",
+                  "state": "NY",
+                  "district": "",
+                  "phone": "202-224-2235",
+                  "office": "218 Russell Senate Office Building Washington DC 20510",
+                  "link": "http://www.mccain.senate.gov"
+                  }
+                  ],
+                  
+                  
               }
-              ],
-              "party": "Democrat",
-              "phones": [
-              "(202) 456-1111"
-              ],
-              "urls": [
-              "http://www.whitehouse.gov/"
-              ],
-              "photoUrl": "https://www.whitehouse.gov/sites/whitehouse.gov/files/images/45/PE%20Color.jpg",
-              "channels": [
-              {
-              "type": "GooglePlus",
-              "id": "+whitehouse"
-              },
-              {
-              "type": "Facebook",
-              "id": "whitehouse"
-              },
-              {
-              "type": "Twitter",
-              "id": "potus"
-              },
-              {
-              "type": "YouTube",
-              "id": "whitehouse"
-              }
-              ]
-              },
-              {
-              "name": "Mike Pence",
-              "address": [
-              {
-              "line1": "The White House",
-              "line2": "1600 Pennsylvania Avenue NW",
-              "city": "Washington",
-              "state": "DC",
-              "zip": "20500"
-              }
-              ],
-              "party": "Republican",
-              "phones": [
-              "(202) 456-1111"
-              ],
-              "urls": [
-              "http://www.whitehouse.gov/"
-              ],
-              "photoUrl": "https://www.whitehouse.gov/sites/whitehouse.gov/files/images/45/VPE%20Color.jpg",
-              "channels": [
-              {
-              "type": "GooglePlus",
-              "id": "+whitehouse"
-              },
-              {
-              "type": "Facebook",
-              "id": "whitehouse"
-              },
-              {
-              "type": "Twitter",
-              "id": "VP"
-              }
-              ]
-              },
-              {
-              "name": "John McCain",
-              "address": [
-              {
-              "line1": "218 Russell Senate Office Building",
-              "city": "Washington",
-              "state": "DC",
-              "zip": "20510"
-              }
-              ],
-              "party": "Republican",
-              "phones": [
-              "(202) 224-2235"
-              ],
-              "urls": [
-              "http://www.mccain.senate.gov/public/"
-              ],
-              "photoUrl": "http://bioguide.congress.gov/bioguide/photo/M/M000303.jpg",
-              "channels": [
-              {
-              "type": "Facebook",
-              "id": "johnmccain"
-              },
-              {
-              "type": "Twitter",
-              "id": "SenJohnMcCain"
-              },
-              {
-              "type": "YouTube",
-              "id": "SenatorJohnMcCain"
-              }
-              ]
-              },
-              {
-              "name": "Jeff Flake",
-              "address": [
-              {
-              "line1": "413 Russell Senate Office Building",
-              "city": "Washington",
-              "state": "DC",
-              "zip": "20510"
-              }
-              ],
-              "party": "Republican",
-              "phones": [
-              "(202) 224-4521"
-              ],
-              "urls": [
-              "http://www.flake.senate.gov/public/"
-              ],
-              "photoUrl": "http://bioguide.congress.gov/bioguide/photo/F/F000444.jpg",
-              "channels": [
-              {
-              "type": "Facebook",
-              "id": "senatorjeffflake"
-              },
-              {
-              "type": "Twitter",
-              "id": "JeffFlake"
-              },
-              {
-              "type": "YouTube",
-              "id": "flakeoffice"
-              }
-              ]
-              },
-              {
-              "name": "Martha McSally",
-              "address": [
-              {
-              "line1": "510 Cannon House Office Building",
-              "city": "Washington",
-              "state": "DC",
-              "zip": "20515"
-              }
-              ],
-              "party": "Republican",
-              "phones": [
-              "(202) 225-2542"
-              ],
-              "urls": [
-              "https://mcsally.house.gov/"
-              ],
-              "photoUrl": "https://mcsally.house.gov/sites/mcsally.house.gov/files/styles/congress_image_medium/public/wysiwyg_uploaded/az02_mcsally.jpg?itok=XDK2ccP0",
-              "channels": [
-              {
-              "type": "Facebook",
-              "id": "RepMcSally"
-              },
-              {
-              "type": "Twitter",
-              "id": "RepMcSally"
-              },
-              {
-              "type": "YouTube",
-              "id": "McSallyForCongress"
-              },
-              {
-              "type": "YouTube",
-              "id": "UCfHMG2Db0TJ_RatSBHuH8NA"
-              }
-              ]
-              },
-              {
-              "name": "Doug Ducey",
-              "address": [
-              {
-              "line1": "1700 West Washington Street,",
-              "city": "Phoenix",
-              "state": "AZ",
-              "zip": "85007"
-              }
-              ],
-              "party": "Republican",
-              "phones": [
-              "(602) 542-4331"
-              ],
-              "urls": [
-              "http://azgovernor.gov/"
-              ],
-              "photoUrl": "http://www.azgovernor.gov/sites/default/files/styles/panopoly_image_half/public/governordougducey_0.jpg?itok=Q_wvQT7v",
-              "emails": [
-              "engage@az.gov"
-              ],
-              "channels": [
-              {
-              "type": "Twitter",
-              "id": "dougducey"
-              },
-              {
-              "type": "YouTube",
-              "id": "UCi_TVbfG4I5SK6GhjYEfyVQ"
-              },
-              {
-              "type": "Facebook",
-              "id": "dougducey"
-              }
-              ]
-              },
-              {
-              "name": "Jeff DeWit",
-              "address": [
-              {
-              "line1": "1700 West Washington Street",
-              "line2": "1st Floor",
-              "city": "Phoenix",
-              "state": "AZ",
-              "zip": "85007"
-              }
-              ],
-              "party": "Republican",
-              "phones": [
-              "(602) 542-7800"
-              ],
-              "urls": [
-              "http://www.aztreasury.gov/"
-              ],
-              "channels": [
-              {
-              "type": "Twitter",
-              "id": "AZTreasurer"
-              }
-              ]
-              },
-              {
-              "name": "Mark Brnovich",
-              "address": [
-              {
-              "line1": "1275 West Washington Street,",
-              "city": "Phoenix",
-              "state": "AZ",
-              "zip": "85007"
-              }
-              ],
-              "party": "Republican",
-              "phones": [
-              "(602) 542-5025"
-              ],
-              "urls": [
-              "https://www.azag.gov/"
-              ],
-              "emails": [
-              "aginfo@azag.gov"
-              ],
-              "channels": [
-              {
-              "type": "GooglePlus",
-              "id": "+ArizonaAttorneyGeneralBrnovich"
-              },
-              {
-              "type": "Twitter",
-              "id": "GeneralBrnovich"
-              }
-              ]
-              },
-              {
-              "name": "Michele Reagan",
-              "address": [
-              {
-              "line1": "1700 W. Washington Street,",
-              "city": "Phoenix",
-              "state": "AZ",
-              "zip": "85007"
-              }
-              ],
-              "party": "Republican",
-              "phones": [
-              "(602) 542-4285"
-              ],
-              "urls": [
-              "https://www.azsos.gov/"
-              ],
-              "channels": [
-              {
-              "type": "Facebook",
-              "id": "AZSecretaryofState"
-              },
-              {
-              "type": "Twitter",
-              "id": "SecretaryReagan"
-              }
-              ]
-              },
-              {
-              "name": "Joe Hart",
-              "address": [
-              {
-              "line1": "1700 West Washington",
-              "line2": "4th Floor;",
-              "city": "Phoenix",
-              "state": "AZ",
-              "zip": "85007"
-              }
-              ],
-              "party": "Republican",
-              "phones": [
-              "(602) 542-5971"
-              ],
-              "urls": [
-              "https://asmi.az.gov/"
-              ]
-              },
-              {
-              "name": "Tom Forese",
-              "address": [
-              {
-              "line1": "1200 W. Washington",
-              "line2": "2nd Floor",
-              "city": "Phoenix",
-              "state": "AZ",
-              "zip": "85007"
-              }
-              ],
-              "party": "Republican",
-              "phones": [
-              "(602) 542-3933"
-              ],
-              "urls": [
-              "http://www.azcc.gov/commissioners/TForese/default.html"
-              ],
-              "emails": [
-              "Forese-web@azcc.gov"
-              ]
-              },
-              {
-              "name": "Bob Burns",
-              "address": [
-              {
-              "line1": "1200 W. Washington",
-              "line2": "2nd Floor",
-              "city": "Phoenix",
-              "state": "AZ",
-              "zip": "85007"
-              }
-              ]
-              }
-                ]
-                            
-                               
-            
-        }
     },
-    
-    methods: {
-        getParty: rep => rep.party === "Republican" ? "republican" : rep.party === "Democrat" ? "democrat" : "independent"
+    methods:{
+        getParty(){
+           return {
+            'republican': this.data.party['republican'],  
+            'democrat': !this.data.party['republican']
+            }
+          }
     }
-  
   }
 </script>
 
@@ -406,28 +101,22 @@
       grid-template-columns: 35% 65%; 
       width: 90%;
       margin: auto;
-       
+      height: 100%;  
   }
+
   .yourReps {
       grid-column: 1/2;
       padding: 1em;
-            
-  }
-  #repCard {
-    overflow: auto;
-    height: 500px;
   }
 
   .repMap {
       grid-column: 2/3;
       padding: 1em;
-      height: 500px;
   }
   ul {
     margin: 0;
     padding: 0;
     list-style-type: none;
-    
   }
   
   ul li {
@@ -438,8 +127,6 @@
     border-left: 5px solid $blue-primary;
     margin-bottom: 4px;
     color: $black;
-    display: grid;
-    grid-template-columns: 30% 70%;
   }
   h3 {
     font-size: $heading-3-size;
@@ -448,28 +135,8 @@
     color: $blue-primary;
   }
 
-  .republican {
+  .party {
     border-left: 5px solid $red-darkestShade;
-  }
-
-  .democrat{
-    border-left: 5px solid $blue-primary;
-  }
-
-  .independent{
-    border-left: 5px solid $gray;
-  }
-
-  #repImg {
-    width: 55px;
-    height: 70px;
-    border-radius: 15px;
-    margin-right: 20px;
-    grid-column: 1/2;
-  }
-  #centerRep {
-    margin: auto auto auto 0;
-    grid-column: 2/3;
   }
   
   
