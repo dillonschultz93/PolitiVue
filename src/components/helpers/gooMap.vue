@@ -1,53 +1,53 @@
 <template>
-  <gmap-map
-    :center="center"
-    :zoom="7"
-    style="width: 700px; height: 500px;"
-  >
-    <gmap-marker
-      :key="index"
-      v-for="(m, index) in markers"
-      :position="m.position"
-      :clickable="true"
-      :draggable="true"
-      @click="center=m.position"
-    ></gmap-marker>
-    
-  </gmap-map>
+  <div class="google-map" :id="mapName"></div>
 </template>
- 
 <script>
-  /////////////////////////////////////////
-  // New in 0.4.0
-  import * as VueGoogleMaps from 'vue2-google-maps';
-  import Vue from 'vue';
- 
-  Vue.use(VueGoogleMaps, {
-    load: {
-      key: 'AIzaSyCTM6kafG8RQwi0qStGmMMqwK30VV52Enc',
-      v: 'OPTIONAL VERSION NUMBER',
-      // libraries: 'places', //// If you need to use place input
+export default {
+  name: 'google-map',
+  props: ['name'],
+  data: function () {
+    return {
+      mapName: this.name + "-map",
+      markerCoordinates: [{
+        latitude: 51.501527,
+        longitude: -0.1921837
+      }, {
+        latitude: 51.505874,
+        longitude: -0.1838486
+      }, {
+        latitude: 51.4998973,
+        longitude: -0.202432
+      }],
+      map: null,
+      bounds: null,
+      markers: []
     }
-  });
- 
-  export default {
-    
-    data () {
-      return {
-        center: {lat: 70.0, lng: 50.0},
-        markers: [{
-          position: {lat: 10.0, lng: 10.0}
-        }, {
-          position: {lat: 11.0, lng: 11.0}
-        }]
-      }
+  },
+  mounted: function () {
+    this.bounds = new google.maps.LatLngBounds();
+    const element = document.getElementById(this.mapName)
+    const mapCentre = this.markerCoordinates[0]
+    const options = {
+      center: new google.maps.LatLng(mapCentre.latitude, mapCentre.longitude)
     }
+    this.map = new google.maps.Map(element, options);
+    this.markerCoordinates.forEach((coord) => {
+      const position = new google.maps.LatLng(coord.latitude, coord.longitude);
+      const marker = new google.maps.Marker({
+        position,
+        map: this.map
+      });
+    this.markers.push(marker)
+      this.map.fitBounds(this.bounds.extend(position))
+    });
   }
-</script> 
-
-
-Add CommentCollapse 
-
-Message Input
-
-Message Justin P. Romanos, Apolonio Garcia, Caleb Harshman, Trevor James
+};
+</script>
+<style scoped>
+.google-map {
+  width: 100%;
+  height: 600px;
+  margin: 0 auto;
+  background: gray;
+}
+</style>
