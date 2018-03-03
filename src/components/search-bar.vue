@@ -9,16 +9,15 @@
 
 <script>
 
-  import axios from 'axios';
+  import axios from 'axios'
+  import bus from '../eventBus.js'
   
   export default {
     name: 'search-bar',
     data(){
       return {
         placeHolder: "Enter Your Zip",
-        address: '',
-        offices: [],
-        officials: []
+        address: ''
       }
     },
     methods: {
@@ -26,10 +25,19 @@
         const context = this
         axios.get(`home/${this.address}`)
              .then(response => {
-               this.offices = response.data.offices
-               this.officials = response.data.officials
-               console.log('Offices', JSON.stringify(this.offices, null, 2))
-               console.log('Officials', JSON.stringify(this.officials, null, 2))
+               //setting variables to the different arrays
+               const offices = response.data.offices
+               const officials = response.data.officials
+               //map through the offices array
+               const representatives = offices.map((office) => {
+                 return {
+                   position: office.name,
+                   officials: office.officialIndices.map((index) => {
+                     return officials[index]
+                   })
+                 }
+               })
+               bus.$emit('representatives', representatives)
              })
       }
     }
