@@ -9,37 +9,30 @@
 
 <script>
 
-  let eventHub = new Vue()
-
-  // import autoComp from "./helpers/autoComp.vue"
   import axios from 'axios';
   
   export default {
     name: 'search-bar',
     data(){
       return {
-        placeHolder: "Enter Your Address",
-        address: ''
+        placeHolder: "Enter Your Zip",
+        address: '',
+        offices: [],
+        officials: []
       }
     },
     methods: {
       getReps: function() {
-        let apiReturn = []
+        const context = this
         axios.get(`home/${this.address}`)
-             .then(function(response){
-               return response.data.officials
-             }).then(function(response){
-               return response.forEach(function(item){
-                 apiReturn.push(item)
-               })
-             }).then(function(response){
-               console.log(JSON.stringify(apiReturn, null, 2))
+             .then(response => {
+               this.offices = response.data.offices
+               this.officials = response.data.officials
+               console.log('Offices', JSON.stringify(this.offices, null, 2))
+               console.log('Officials', JSON.stringify(this.officials, null, 2))
              })
       }
     }
-    // components: {
-    //   autoComp: autoComp
-    // }
   }
 </script>
 
