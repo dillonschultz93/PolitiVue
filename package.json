@@ -6,9 +6,10 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
+    "dev": "node dev.js",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "start": "node server.js",
+    "production": "NODE_ENV='production' node server.js",
     "postinstall": "npm run build"
   },
   "dependencies": {

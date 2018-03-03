@@ -1,26 +1,45 @@
 <template>
   <div id="search-bar">
     <div class="input-container">
-      <auto-comp id="zip-code" :placeholder="placeHolder"></auto-comp>
-      <button  id="search-zip" type="button">Find Your Representatives</button>
-    </div>
+      <input id="zip-code" v-model="address" :placeholder="placeHolder">
+      <button v-on:click="getReps" id="search-zip" type="button">Find Your Representatives</button>
+    </div> 
   </div>
 </template>
 
 <script>
 
-  import autoComp from "./helpers/autoComp.vue"
+  let eventHub = new Vue()
+
+  // import autoComp from "./helpers/autoComp.vue"
+  import axios from 'axios';
   
   export default {
     name: 'search-bar',
     data(){
       return {
-        placeHolder: "Enter Your Address"
+        placeHolder: "Enter Your Address",
+        address: ''
       }
     },
-    components: {
-      autoComp: autoComp
+    methods: {
+      getReps: function() {
+        let apiReturn = []
+        axios.get(`home/${this.address}`)
+             .then(function(response){
+               return response.data.officials
+             }).then(function(response){
+               return response.forEach(function(item){
+                 apiReturn.push(item)
+               })
+             }).then(function(response){
+               console.log(JSON.stringify(apiReturn, null, 2))
+             })
+      }
     }
+    // components: {
+    //   autoComp: autoComp
+    // }
   }
 </script>
 

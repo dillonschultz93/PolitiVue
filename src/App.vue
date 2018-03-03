@@ -3,7 +3,7 @@
       <Nav />
       <Jumbo />
       <Main />
-      <Footer />
+      <!-- <Footer /> -->
   </div>
 </template>
 
@@ -11,15 +11,20 @@
 import Nav from "./components/navbar.vue"
 import Jumbo from "./components/jumbotron.vue"
 import Main from "./components/main-view.vue"
-import Footer from "./components/footer.vue"
+// import Footer from "./components/footer.vue"
 
 export default {
   name: 'app',
+  data() {
+    return {
+      
+    }
+  },
   components: {
     Nav,
     Jumbo,
-    Main,
-    Footer
+    Main
+    // Footer
   }
 }
 </script>
