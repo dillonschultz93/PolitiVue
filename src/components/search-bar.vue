@@ -9,6 +9,8 @@
 
 <script>
 
+  let eventHub = new Vue()
+
   // import autoComp from "./helpers/autoComp.vue"
   import axios from 'axios';
   
