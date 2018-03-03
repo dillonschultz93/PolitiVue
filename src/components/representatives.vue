@@ -1,20 +1,36 @@
 <template>
       <div id="repCard">
-        <ul>        
-          <li>
-            <img>
-            <div></div>
-          </li>
-        </ul> 
+        <!-- <ul v-if="representatives.length">        
+          <li v-for="representative in representatives"> -->
+            <!-- <img>
+            <div></div> -->
+            <!-- {{ representative.position }} -->
+          <!-- </li>
+        </ul>  -->
+        
       </div> 
 
 </template>
 <script> 
   
+  import bus from '../eventBus.js'
+  
   export default {
     name: 'repCard', 
-    data: {
-        reps: {}
+    
+    mounted() {
+      bus.$on('representatives', (representatives) => {
+        this.representatives = representatives
+        console.log('representatives', 
+          JSON.stringify(
+            this.representatives, null, 2)
+          )
+      })
+    },
+    data() {
+      return {
+        representatives: []
+      }
     },
 
     
