@@ -1,12 +1,13 @@
 <template>
       <div id="repCard">
-        <ul v-if="representatives.length">        
-          <li v-for="representative in representatives">
+        <!-- <ul v-if="representatives.length">        
+          <li v-for="representative in representatives"> -->
             <!-- <img>
             <div></div> -->
-            {{ representative.position }}
-          </li>
-        </ul> 
+            <!-- {{ representative.position }} -->
+          <!-- </li>
+        </ul>  -->
+        
       </div> 
 
 </template>
