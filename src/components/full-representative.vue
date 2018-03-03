@@ -7,7 +7,7 @@
 import bus from '../eventBus.js'
 
 export default {
-  name:'fullRep'
+  name:'fullRep',
   data() {
     return {
       
