@@ -1,9 +1,10 @@
 <template>
       <div id="repCard">
-        <ul>
-                    
-          <li v-for="(data, index) in officials.slice(0,4)" :key='index' :class="getParty(data)"><img id="repImg" v-bind:src="data.photoUrl"><div id="centerRep">{{data.name}}, {{data.address[0].state}}</div></li>
-          
+        <ul>        
+          <li>
+            <img>
+            <div></div>
+          </li>
         </ul> 
       </div> 
 
@@ -18,22 +19,7 @@
 
     
     methods: {
-        getParty: rep => rep.party === "Republican" ? "republican" : rep.party === "Democrat" ? "democrat" : "independent",
-        getReps : function(log){
-            axios.get(`/home/${zip}`)
-              .then(function (response) {
-
-                console.log(response.data);
-
-                this.reps = response.data;
-
-
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
-            
-        }
+        getParty: rep => rep.party === "Republican" ? "republican" : rep.party === "Democrat" ? "democrat" : "independent"
     }
   
   }
