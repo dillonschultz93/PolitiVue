@@ -7,19 +7,19 @@
 
     </div>
     <div class="repMap">
-        <gmap-map />
+        <google-map />
     </div>
   </div>
 </template>
 <script>
-  import gmapMap from "./helpers/gooMap.vue"
+  import googleMap from "./helpers/gooMap.vue"
   import Reps from "./representatives.vue"
   
   
   export default {
     name: 'mainVeiw', 
     components: {
-      gmapMap,
+      googleMap,
       Reps
     },
     
