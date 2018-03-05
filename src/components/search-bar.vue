@@ -1,8 +1,10 @@
 <template>
   <div id="search-bar">
     <div class="input-container">
-      <input id="zip-code" v-model="address" :placeholder="placeHolder">
-      <button v-on:click="getReps" id="search-zip" type="button">Find Your Representatives</button>
+      <input id="zip-code" v-model="address">
+      <button v-on:click="getReps" id="search-zip" type="button">
+        <img src="../assets/svg-icons/search.svg" class="search-icon">
+      </button>
     </div> 
   </div>
 </template>
@@ -16,7 +18,6 @@
     name: 'search-bar',
     data(){
       return {
-        placeHolder: "Enter Your Zip",
         address: ''
       }
     },
@@ -50,40 +51,53 @@
   @import "../scss/components/_colors";
   
   .input-container {
-    // background-color: $black;
-    // padding: 20px;
+    display: flex;
   }
   
   #zip-code {
     background-color: rgba(255,255,255, 0.75);
     border: 2px solid $white;
-    border-radius: 10px;
-    color: $blue-darkestShade;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    color: $blue-darkShade;
     font-family: $primary-font;
-    font-size: $paragraph;
+    font-size: $heading-4-size;
     outline: none;
-    padding: 8px;
+    padding: 12px;
     text-align: center;
     transition: 0.5s;
-    width: 160px;
+    width: 460px;
   }
   
   #zip-code:focus {
-    border: 2px solid $blue-darkestShade;
+    border: 2px solid $blue-darkShade;
   }
   
   #search-zip {
-    background-color: $blue-darkestShade;
-    border: none;
-    border-radius: 10px;
+    align-items: center;
+    background-color: $blue-darkShade;
+    border: 2px solid $blue-darkShade;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
     color: $white;
+    display: flex;
     font-family: $primary-font;
     font-size: $paragraph;
+    justify-content: center;
     outline: none;
     padding: 8px;
     text-align: center;
     transition: 0.5s;
-    width: 220px;
+    width: 60px;
+  }
+  
+  #search-zip:active {
+    background-color: #0a2c56;
+  }
+  
+  .search-icon {
+    width: 25px;
+    height: 25px;
   }
   
 </style>

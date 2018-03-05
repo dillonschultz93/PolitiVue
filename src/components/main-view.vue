@@ -1,7 +1,6 @@
 <template>
   <div id="mainVeiw">
     <div class="yourReps">
-      <h3>Your Representatives</h3>
       <Reps />
     </div>
     <div class="repView">
@@ -29,6 +28,19 @@
   
   body {
     margin: 0;
+  }
+  
+  #mainVeiw {
+    lost-center: 980px 0 flex;
+    height: 100vh;
+  }
+  
+  .yourReps {
+    lost-column: 1/2 0 flex;
+  }
+  
+  .repView {
+    lost-column: 1/2 0 flex;
   }
   
 </style>

@@ -2,7 +2,8 @@
   <div id="jumbotron">
     <div class="jumbotron-container">
       <div class="text-container">
-        <h1 class="tagline">Some Text About <br>How Great This App Is</h1>
+        <h1 class="tagline">Hello!</h1>
+        <h3 class="subtagline">Enter Your Zip Code To Find Your State Representatives</h3>
       </div>
       <Searchbar />
     </div>
@@ -39,7 +40,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 94vh;
+    height: 95vh;
     margin: 0;
     width: 100%;
   }
@@ -55,8 +56,20 @@
   .tagline {
     color: $red-darkShade;
     font-family: $heading-font;
-    font-size: 5em;
+    font-size: 6em;
     line-height: $primary-leading;
+    margin-bottom: 10px;
+    opacity: 0.75;
+    text-align: center;
+  }
+  
+  .subtagline {
+    color: $blue-darkestShade;
+    font-family: $heading-font;
+    font-size: $heading-3-size;
+    font-weight: $primary-weight;
+    line-height: $primary-leading;
+    margin-top: 10px;
     opacity: 0.75;
     text-align: center;
   }
