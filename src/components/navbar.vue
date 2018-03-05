@@ -103,4 +103,34 @@
     width: 100%;
   }
   
+  @media screen and (max-width: 400px) {
+    
+    .nav-container {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    
+    .brandmark {
+      height: $heading-4-size;
+      width: $heading-4-size;
+      margin-right: 9px;
+    }
+    
+    .logotype {
+      font-size: $heading-4-size;
+    }
+    
+    .nav-items {
+      font-size: $small-paragraph;
+    }
+    
+  }
+  
+  @media screen and (max-width: 1000px) {
+    .nav-container {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+  
 </style>
