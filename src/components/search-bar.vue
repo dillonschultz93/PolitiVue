@@ -3,7 +3,7 @@
     <div class="input-container">
       <input id="zip-code" v-model="address">
       <button v-on:click="getReps" id="search-zip" type="button">
-        <img src="../assets/svg-icons/search.svg" class="search-icon">
+        <img src="../assets/search.svg" class="search-icon">
       </button>
     </div> 
   </div>

@@ -15,13 +15,13 @@
                 <img :src="official.photoUrl" class="portrait indepen-border">
               </div>
               <div class="image-container" v-else-if="!official.photoUrl && official.party === 'Democratic'">
-                <img :src="noPortrait" class="portrait dem-border">
+                <img src="../assets/portrait.svg" class="portrait dem-border">
               </div>
               <div class="image-container" v-else-if="!official.photoUrl && official.party === 'Republican'">
-                <img :src="noPortrait" class="portrait repub-border">
+                <img src="../assets/portrait.svg" class="portrait repub-border">
               </div>
               <div class="image-container" v-else-if="!official.photoUrl && official.party === 'Nonpartisan'">
-                <img :src="noPortrait" class="portrait indepen-border">
+                <img src="../assets/portrait.svg" class="portrait indepen-border">
               </div>
               <div class="official-info">
                 <p class="official-name"><span class="bold">{{ official.name }}</span> <br> <span class="light">{{ representative.position }}</span></p>
@@ -54,7 +54,7 @@
     data() {
       return {
         representatives: [],
-        noPortrait: '../assets/no-portrait.svg',
+        noPortrait: '../assets/portrait.svg',
         democrat: 'democrat',
         republican: 'republican',
         independent: 'independent',
