@@ -1,5 +1,9 @@
 <template>
   
+  <div id="fullRep">
+    <p>{{ this.seletedOfficial.name }}</p>
+  </div>
+  
 </template>
 
 <script>
@@ -10,11 +14,14 @@ export default {
   name:'fullRep',
   data() {
     return {
-      
+      seletedOfficial: {}
     }
   },
-  methods: {
-      getParty: rep => rep.party === "Republican" ? "republican" : rep.party === "Democrat" ? "democrat" : "independent"
+  mounted() {
+    bus.$on('seletedOfficial', (seletedOfficial) => {
+      this.seletedOfficial = seletedOfficial
+      console.log('seleted official', JSON.stringify(this.seletedOfficial, null, 2))
+    })
   }
 }
 </script>
