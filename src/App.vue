@@ -1,8 +1,10 @@
 <template>
   <div id="app">
-      <Nav />
+      <!-- <Nav />
       <Jumbo />
-      <Main />
+      <Main /> -->
+      <SignUp />
+      <Login />
       <!-- <Footer /> -->
   </div>
 </template>
@@ -11,6 +13,8 @@
 import Nav from "./components/navbar.vue"
 import Jumbo from "./components/jumbotron.vue"
 import Main from "./components/main-view.vue"
+import SignUp from "./components/sign-up.vue"
+import Login from "./components/login.vue"
 // import Footer from "./components/footer.vue"
 
 export default {
@@ -23,7 +27,9 @@ export default {
   components: {
     Nav,
     Jumbo,
-    Main
+    Main,
+    SignUp,
+    Login
     // Footer
   }
 }
