@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-      <!-- <Nav />
+      <Nav />
       <Jumbo />
-      <Main /> -->
-      <SignUp />
-      <Login />
+      <Main />
+      <!-- <SignUp />
+      <Login /> -->
       <!-- <Footer /> -->
   </div>
 </template>
