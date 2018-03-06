@@ -3,7 +3,7 @@ var express = require("express")
 var router = express.Router()
 var api = require("../apiCalls/api.js")
 
-router.get("/home", (req, res) => {
+router.get("/api", (req, res) => {
   api.federal.getHome().then(results => {
     console.log(results.data)
     res.json(results.data)
@@ -12,14 +12,14 @@ router.get("/home", (req, res) => {
   }) 
 })
 
-router.get("/home/:zip", (req, res) => {
+router.get("/api/:zip", (req, res) => {
   api.federal.getRepsByZip(req.params.zip).then(results => {
     console.log(results.data)
     res.json(results.data)
   }).catch(err => console.error(err))
 })
 
-router.get("/elections", (req, res) => {
+router.get("/api/elections", (req, res) => {
   api.federal.getElections().then(results => {
     res.json(results.data)
   })
