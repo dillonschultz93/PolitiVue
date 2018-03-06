@@ -1,5 +1,5 @@
 <template>
-<form action="action_page.php" style="border:1px solid #ccc" id="sign-up">
+<form action="/" method="post" style="border:1px solid #ccc" id="sign-up">
   <div class="container">
     <h1>Sign Up</h1>
     <p>Please fill in this form to create an account.</p>
