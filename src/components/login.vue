@@ -1,19 +1,15 @@
 <template>
-<form action="/" method="post" style="border:1px solid #ccc" id="sign-up">
+<form v-on:submit.prevent="postSignIn" style="border:1px solid #ccc" id="sign-up">
   <div class="container">
     <h1>Login</h1>
     <p>Please fill in this form to login.</p>
     <hr>
 
     <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" required>
+    <input type="text" placeholder="Enter Email" v-model="email" required>
 
     <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
-
-    <label>
-      <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
-    </label>
+    <input type="password" placeholder="Enter Password" v-model="psw" required>
 
     <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
 
@@ -25,23 +21,33 @@
 </template>
  
 <script>
-
+import axios from "axios"
  
 export default {
 name: "sign-up",
-data: {
-    return(){
-
+data() {
+    return{
+      email: "",
+      psw: ""
+    }
+  },
+  methods: {
+    postSignIn: function() {
+      console.log(this._data);
+      axios.post("/api/signin", this._data).then(res => console.log(res));
     }
   }
 }
 </script> 
 
 <style>
-* {box-sizing: border-box}
+* {
+  box-sizing: border-box;
+}
 
 /* Full-width input fields */
-  input[type=text], input[type=password] {
+input[type="text"],
+input[type="password"] {
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -50,7 +56,8 @@ data: {
   background: #f1f1f1;
 }
 
-input[type=text]:focus, input[type=password]:focus {
+input[type="text"]:focus,
+input[type="password"]:focus {
   background-color: #ddd;
   outline: none;
 }
@@ -62,7 +69,7 @@ hr {
 
 /* Set a style for all buttons */
 button {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -73,7 +80,7 @@ button {
 }
 
 button:hover {
-  opacity:1;
+  opacity: 1;
 }
 
 /* Extra styles for the cancel button */
@@ -83,7 +90,8 @@ button:hover {
 }
 
 /* Float cancel and signup buttons and add an equal width */
-.cancelbtn, .signupbtn {
+.cancelbtn,
+.signupbtn {
   float: left;
   width: 50%;
 }
@@ -102,7 +110,8 @@ button:hover {
 
 /* Change styles for cancel button and signup button on extra small screens */
 @media screen and (max-width: 300px) {
-  .cancelbtn, .signupbtn {
+  .cancelbtn,
+  .signupbtn {
     width: 100%;
   }
 }
