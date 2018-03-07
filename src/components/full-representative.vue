@@ -39,7 +39,7 @@
           </a>
         </div>
       </div>
-      <google-map />
+      <google-map v-if="this.seletedOfficial.address"></google-map>
     </div>
   </div>
 
