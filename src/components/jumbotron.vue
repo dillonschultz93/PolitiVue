@@ -3,7 +3,6 @@
     <div class="jumbotron-container">
       <div class="text-container">
         <h1 class="tagline">Hello!</h1>
-        <h3 class="subtagline">Enter Your Zip Code To Find Your State Representatives</h3>
       </div>
       <Searchbar />
     </div>
@@ -40,7 +39,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 95vh;
+    height: 100vh;
     margin: 0;
     width: 100%;
   }
@@ -56,7 +55,7 @@
   .tagline {
     color: $red-darkShade;
     font-family: $heading-font;
-    font-size: 6em;
+    font-size: 7em;
     line-height: $primary-leading;
     margin-bottom: 10px;
     opacity: 0.75;
