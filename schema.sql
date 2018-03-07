@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS politiVue;
+CREATE DATABASE politiVue;
