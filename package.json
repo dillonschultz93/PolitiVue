@@ -10,8 +10,7 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "start": "node server.js",
     "production": "NODE_ENV='production' node server.js",
-    "postinstall": "npm run build",
-    "generate-icons": "vsvg -s ./svg-icons -t ./src/compiled-icons"
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "autoprefixer": "^8.0.0",

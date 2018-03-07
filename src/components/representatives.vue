@@ -1,10 +1,10 @@
 <template>
       
-      <div id="repCard">
-        <h3 class="your-reps">Your Representatives</h3>
+      <div id="repCard"> 
+        <h3 class="your-reps">{{ this.location }}</h3>
         <div class="card-container" v-if="representatives.length">
-          <div v-for="representative in representatives">
-            <div class="card" v-for="official in representative.officials">
+          <div v-for="(representative, repIndex) in representatives">
+            <div class="card" v-for="(official, officialIndex) in representative.officials" @click="seeRep(repIndex, officialIndex)">
               <div class="image-container" v-if="official.photoUrl && official.party === 'Democratic'">
                 <img :src="official.photoUrl" class="portrait dem-border">
               </div>
@@ -49,11 +49,16 @@
           JSON.stringify(
             this.representatives, null, 2)
           )
+      }),
+      bus.$on('location', (parsedAddress) => {
+        this.location = `Your representatives in ${parsedAddress.location}`
+        console.log('location', this.location)
       })
     },
     data() {
       return {
         representatives: [],
+        location: '',
         noPortrait: '../assets/portrait.svg',
         democrat: 'democrat',
         republican: 'republican',
@@ -61,6 +66,69 @@
         demBorder: 'dem-border',
         repubBorder: 'repub-border',
         indepenBorder: 'indepen-border'
+      }
+    },
+    methods: {
+      photoConditional: function(string) {
+        if(string){
+          return string
+        } else {
+          return '../assets/portrait.svg'
+        }
+      },
+      addressGen: function(obj) {
+        if(obj.line2){
+          return `${obj.line1}, ${obj.line2}, ${obj.city}, ${obj.state}, ${obj.zip}`
+        } else {
+          return `${obj.line1} ${obj.city}, ${obj.state}, ${obj.zip}`
+        }
+      },
+      emailGen: function(array) {
+        if(array){
+          return array[0]
+        }
+      },
+      websiteExist: function(array) {
+        if(array) {
+          return array[0]
+        }
+      },
+      seeRep: function(repIndex, officialIndex) {
+        const seletedOfficial = {
+          photo: this.photoConditional(this.representatives[repIndex]
+                     .officials[officialIndex]
+                     .photoUrl),
+          name: this.representatives[repIndex]
+                    .officials[officialIndex]
+                    .name,
+          position: this.representatives[repIndex]
+                        .position,
+          party: this.representatives[repIndex]
+                     .officials[officialIndex]
+                     .party,
+          address: this.addressGen(
+            this.representatives[repIndex]
+                .officials[officialIndex]
+                .address[0]
+          ),
+          phone: this.representatives[repIndex]
+                     .officials[officialIndex]
+                     .phones[0],
+          email: this.emailGen(
+            this.representatives[repIndex]
+                       .officials[officialIndex]
+                       .emails
+          ),
+          website: this.websiteExist(
+            this.representatives[repIndex]
+                         .officials[officialIndex]
+                         .urls
+          ),
+          social: this.representatives[repIndex]
+                        .officials[officialIndex]
+                        .channels
+        }
+        bus.$emit('seletedOfficial', seletedOfficial)
       }
     }
   }
@@ -77,7 +145,7 @@
   .your-reps {
     color: $blue-primary;
     font-family: $heading-font;
-    font-size: $heading-2-size;
+    font-size: $heading-3-size;
   }
   
   .card-container {
