@@ -1,7 +1,7 @@
 <template>
   <div id="search-bar">
     <div class="input-container">
-      <input id="zip-code" v-model="address">
+      <input id="zip-code" v-model="address" :placeholder='placeholder'>
       <button v-on:click="getReps" id="search-zip" type="button">
         <img src="../assets/search.svg" class="search-icon">
       </button>
@@ -18,7 +18,8 @@
     name: 'search-bar',
     data(){
       return {
-        address: ''
+        address: '',
+        placeholder: 'Enter Your Zip Code To Find Your State Representatives'
       }
     },
     methods: {
@@ -39,6 +40,10 @@
                  }
                })
                bus.$emit('representatives', representatives)
+               const parsedAddress = {
+                 location: `${response.data.normalizedInput.city}, ${response.data.normalizedInput.state}`
+               }
+               bus.$emit('location', parsedAddress)
              })
       }
     }
@@ -63,10 +68,10 @@
     font-family: $primary-font;
     font-size: $heading-4-size;
     outline: none;
-    padding: 12px;
+    padding: 25px;
     text-align: center;
     transition: 0.5s;
-    width: 460px;
+    width: 550px;
   }
   
   #zip-code:focus {
@@ -88,7 +93,7 @@
     padding: 8px;
     text-align: center;
     transition: 0.5s;
-    width: 60px;
+    width: 100px;
   }
   
   #search-zip:active {
@@ -96,8 +101,8 @@
   }
   
   .search-icon {
-    width: 25px;
-    height: 25px;
+    width: 32px;
+    height: 32px;
   }
   
 </style>
