@@ -16,8 +16,27 @@
         </div>
       </div>
       <div class="contact">
-        <div class="address">
-          <p v-if="this.seletedOfficial.address">{{ this.seletedOfficial.address }}</p>
+        <div class="phone">
+          <p v-if="this.seletedOfficial.phone">{{ this.seletedOfficial.phone }}</p>
+        </div>
+        <div class="website">
+          <a v-if="this.seletedOfficial.website" :href="this.seletedOfficial.website">
+            {{ this.seletedOfficial.website }}
+          </a>
+        </div>
+        <div v-for="item in this.seletedOfficial.social" class="social">
+          <a v-if="item.type === 'GooglePlus'" :href="`https://plus.google.com/${item.id}`">
+            <img src="../assets/google-plus-logo.svg" class="social-icon">
+          </a>
+          <a v-if="item.type === 'Facebook'" :href="`https://facebook.com/${item.id}`">
+            <img src="../assets/facebook-logo.svg" class="social-icon">
+          </a>
+          <a v-if="item.type === 'Twitter'" :href="`https://twitter.com/${item.id}`">
+            <img src="../assets/twitter-logo.svg" class="social-icon">
+          </a>
+          <a v-if="item.type === 'YouTube'" :href="`https://youtube.com/${item.id}`">
+            <img src="../assets/yt-logo.svg" class="social-icon">
+          </a>
         </div>
       </div>
       <google-map />
@@ -38,7 +57,9 @@ export default {
   },
   data() {
     return {
-      seletedOfficial: {}
+      seletedOfficial: {},
+      url: '',
+      logoAssets: ''
     }
   },
   mounted() {
@@ -65,5 +86,8 @@ export default {
     object-fit: cover;
     width: 175px;
   }
-
+  
+  .social-icon {
+    width: 32px;
+  }
 </style>
