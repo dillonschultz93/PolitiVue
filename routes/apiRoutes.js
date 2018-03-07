@@ -26,9 +26,8 @@ router.get("/api/elections", (req, res) => {
   })
 })
 
-router.post("/signup", (req, res) => {
+router.post("/api/signup", (req, res) => {
   console.log(req.body)
-  if (!/[A-Z]/.test(req.body.password) || req.body.password.length < 8 || !/[a-z]/.test(req.body.password) || !/\d/.test(req.body.password)) return res.send("Password Not Good Enough")
   db.User.findOne({
     where: {
       email: req.body.email
@@ -37,23 +36,24 @@ router.post("/signup", (req, res) => {
     console.log(user)
     if (user) return res.send("User already taken")
     else {
-      var userPassword = bcrypt.hashSync(req.body.password)
+      var userPassword = bcrypt.hashSync(req.body.psw)
       console.log(userPassword)
+      var full_name = req.body.first_name + " " + req.body.last_name
       db.User.create({
         email: req.body.email,
-        full_name: req.body.full_name,
-        zipcode: req.body.zipcode,
+        full_name: full_name,
+        zipcode: req.body.zip_code,
         party: req.body.party,
         password: userPassword
       }).then(result => {
         console.log(result)
-        res.sendStatus(200)
+        res.send("User Registered")
       })
     }
   })
 })
 
-router.post('/signin', (req, res) => {
+router.post('/api/signin', (req, res) => {
   console.log(req.body)
   db.User.findOne({
     where: {
@@ -62,7 +62,7 @@ router.post('/signin', (req, res) => {
   }).then(user => {
     console.log(user)
     if(!user) return res.send("User Not Found")
-    else if (bcrypt.compareSync(req.body.password, user.password)) {
+    else if (bcrypt.compareSync(req.body.psw, user.password)) {
       res.send("You are signed in")
     }
     else {
