@@ -32,7 +32,6 @@
   
   #mainVeiw {
     lost-center: 980px 0 flex;
-    height: 100vh;
   }
   
   .yourReps {
