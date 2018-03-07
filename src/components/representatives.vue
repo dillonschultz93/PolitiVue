@@ -1,7 +1,7 @@
 <template>
       
       <div id="repCard"> 
-        <h3 class="your-reps">Your Representatives</h3>
+        <h3 class="your-reps">{{ this.location }}</h3>
         <div class="card-container" v-if="representatives.length">
           <div v-for="(representative, repIndex) in representatives">
             <div class="card" v-for="(official, officialIndex) in representative.officials" @click="seeRep(repIndex, officialIndex)">
@@ -49,11 +49,16 @@
           JSON.stringify(
             this.representatives, null, 2)
           )
+      }),
+      bus.$on('location', (parsedAddress) => {
+        this.location = `Your representatives in ${parsedAddress.location}`
+        console.log('location', this.location)
       })
     },
     data() {
       return {
         representatives: [],
+        location: '',
         noPortrait: '../assets/portrait.svg',
         democrat: 'democrat',
         republican: 'republican',
@@ -64,6 +69,13 @@
       }
     },
     methods: {
+      photoConditional: function(string) {
+        if(string){
+          return string
+        } else {
+          return '../assets/portrait.svg'
+        }
+      },
       addressGen: function(obj) {
         if(obj.line2){
           return `${obj.line1}, ${obj.line2}, ${obj.city}, ${obj.state}, ${obj.zip}`
@@ -83,9 +95,9 @@
       },
       seeRep: function(repIndex, officialIndex) {
         const seletedOfficial = {
-          photo: this.representatives[repIndex]
+          photo: this.photoConditional(this.representatives[repIndex]
                      .officials[officialIndex]
-                     .photoUrl,
+                     .photoUrl),
           name: this.representatives[repIndex]
                     .officials[officialIndex]
                     .name,
@@ -133,7 +145,7 @@
   .your-reps {
     color: $blue-primary;
     font-family: $heading-font;
-    font-size: $heading-2-size;
+    font-size: $heading-3-size;
   }
   
   .card-container {
