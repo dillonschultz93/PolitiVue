@@ -24,7 +24,6 @@
     },
     methods: {
       getReps: function() {
-        const context = this
         axios.get(`api/${this.address}`)
              .then(response => {
                //setting variables to the different arrays
