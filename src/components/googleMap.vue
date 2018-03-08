@@ -22,8 +22,21 @@ export default {
     }
   },
   mounted: function () {
-    bus.$on('location', (location) => {
-      this.address = location
+    console.log(bus)
+    bus.$on('address', (seletedOfficial) => {
+      this.address = seletedOfficial
+      console.log('address official', JSON.stringify(this.seletedOfficial, null, 2))
+    })
+    
+    const geocoder = new google.maps.Geocoder()
+    const address = this.address
+    geocoder.geocode({ 'address': address }, (results, status) => {
+      if(status == google.maps.GeocoderStatus.OK) {
+        const lat = results[0].geometry.location.latitude
+        const lng = results[0].geometry.location.longitude
+        this.markerCoordinates[0].latitude = lat
+        this.markerCoordinates[0].longitude = lng
+      }
     })
     this.bounds = new google.maps.LatLngBounds();
     const element = document.getElementById(this.mapName)
@@ -41,16 +54,7 @@ export default {
     this.markers.push(marker)
       this.map.fitBounds(this.bounds.extend(position))
     });
-    const geocoder = new google.maps.Geocoder()
-    const address = this.address
-    geocoder.geocode({ 'address': address }, (results, status) => {
-      if(status == google.maps.GeocoderStatus.OK) {
-        const lat = results[0].geometry.location.latitude
-        const lng = results[0].geometry.location.longitude
-        this.markerCoordinates[0].latitude = lat
-        this.markerCoordinates[0].longitude = lng
-      }
-    })
+    
   }
 };
 

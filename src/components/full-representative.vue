@@ -83,17 +83,13 @@ export default {
       seletedOfficial: {},
       url: '',
       logoAssets: '',
-      show: false,
+      show: true,
     }
   },
   mounted() {
     bus.$on('seletedOfficial', (seletedOfficial) => {
       this.seletedOfficial = seletedOfficial
       console.log('seleted official', JSON.stringify(this.seletedOfficial, null, 2))
-    })
-    bus.$on('animation',(animate) => {
-      this.show = animate
-      console.log(this.show)
     })
   }
 }
