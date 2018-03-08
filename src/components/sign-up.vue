@@ -58,16 +58,35 @@ export default {
     closeWithX() {
       this.$emit('closeX')
     },
+    userExist: function(response) {
+      if(response.status === 200 && response.data !== 'User Not Found' && response.data !== 'Password Incorrect') {
+        this.inDatabase = true
+        const splitName = response.data.split(' ')
+        this.firstName = splitName[0]
+        bus.$emit('firstName', this.firstName)
+        console.log('name to be passed', this.firstName)
+        this.close()
+        
+      } else {
+        this.inDatabase = false
+      }
+    },
+    postSignIn: function() {
+      console.log(this._data);
+      axios.post("/api/signin", {email:this.email, psw:this.psw})
+           .then((res) => {
+             console.log('response', res)
+             this.userExist(res)
+             console.log('Logged in', this.inDatabase)
+           })
+    },
     postSignUp: function() {
       console.log(this._data);
       if (this.psw != this.psw2) return "Passwords Don't Match";
       if (!/[A-Z]/.test(this.psw) || this.psw.length < 8 || !/[a-z]/.test(this.psw) || !/\d/.test(this.psw)) return "Password Must Contain at Least One Captial Letter, Lower Case Letter, a Number, and at least 8 characters long"
       axios.post("/api/signup", this._data)
            .then((res) => {
-             console.log('response', res)
-             bus.$emit('email', this.email)
-             bus.$emit('password', this.psw)
-             this.close()
+             this.postSignIn()
            });
       
     }
