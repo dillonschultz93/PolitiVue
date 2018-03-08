@@ -35,11 +35,11 @@
   }
   
   .yourReps {
-    lost-column: 1/2 0 flex;
+    lost-column: 1/2 flex;
   }
   
   .repView {
-    lost-column: 1/2 0 flex;
+    lost-column: 1/2 flex;
   }
   
 </style>
