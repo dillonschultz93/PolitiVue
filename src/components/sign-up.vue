@@ -37,6 +37,7 @@
  
 <script>
 import axios from "axios";
+import bus from '../eventBus.js'
 
 export default {
   name: "sign-up",
@@ -64,7 +65,9 @@ export default {
       axios.post("/api/signup", this._data)
            .then((res) => {
              console.log('response', res)
-             this.first_name
+             bus.$emit('email', this.email)
+             bus.$emit('password', this.psw)
+             this.close()
            });
       
     }
