@@ -15,12 +15,7 @@ module.exports = function (sequelize, DataTypes) {
     zipcode: {
       type: DataTypes.INTEGER,
       allowNull: false
-    },
-    party: {
-      type: DataTypes.STRING,
-      allowNull: true
-    }
-    
+    }  
   })
 
   return User

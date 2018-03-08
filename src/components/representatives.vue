@@ -1,6 +1,6 @@
 <template>
       
-      <div id="repCard"> 
+      <div v-if="this.representatives" id="repCard"> 
         <h3 class="your-reps">{{ this.location }}</h3>
         <div class="card-container" v-if="representatives.length">
           <div v-for="(representative, repIndex) in representatives">
@@ -25,9 +25,9 @@
               </div>
               <div class="official-info">
                 <p class="official-name"><span class="bold">{{ official.name }}</span> <br> <span class="light">{{ representative.position }}</span></p>
-                <p class="official-party" v-if="official.party === 'Democratic'">Party: <span v-bind:class="democrat">{{ official.party }}</span></p>
-                <p class="official-party" v-else-if="official.party === 'Republican'">Party: <span v-bind:class="republican">{{ official.party }}</span></p>
-                <p class="official-party" v-else="official.party === 'Nonpartisan'">Party: <span v-bind:class="independent">{{ official.party }}</span></p>
+                <p class="official-party" v-if="official.party === 'Democratic'"><span v-bind:class="democrat">{{ official.party }}</span></p>
+                <p class="official-party" v-else-if="official.party === 'Republican'"><span v-bind:class="republican">{{ official.party }}</span></p>
+                <p class="official-party" v-else="official.party === 'Nonpartisan'"><span v-bind:class="independent">{{ official.party }}</span></p>
               </div>
             </div>
           </div>
@@ -65,7 +65,8 @@
         independent: 'independent',
         demBorder: 'dem-border',
         repubBorder: 'repub-border',
-        indepenBorder: 'indepen-border'
+        indepenBorder: 'indepen-border',
+        animate: false
       }
     },
     methods: {
@@ -128,7 +129,9 @@
                         .officials[officialIndex]
                         .channels
         }
+        this.animate = true
         bus.$emit('seletedOfficial', seletedOfficial)
+        bus.$emit('animation', this.animate)
       }
     }
   }
@@ -140,6 +143,10 @@
   
   body {
     margin: 0;
+  }
+  
+  #repCard {
+    margin-bottom: 30px;
   }
   
   .your-reps {
@@ -159,6 +166,7 @@
   
   .card {
     align-items: center;
+    cursor: pointer;
     display: flex;
     height: 125px;
     margin: 30px 0px 30px 0px;

@@ -4,47 +4,85 @@
       <div class="brand">
         <img src="../assets/logo.svg" class="brandmark">
         <h3 class="logotype">PolitiVue</h3>
-      </div>
-      
+      </div>    
       <div class="nav-items">
-        <a href="#sign-up-modal" class="sign-in">Sign In</a>
-        <a href="#login-modal" class="create-account">Create an Account</a>
+        <a v-show="showSignInNav" @click="showSignIn" href="#" class="sign-in">Sign In</a>
+        <a v-show="showCreateNav" @click="showCreateUser" href="#" class="create-account">Create an Account</a>
+        <a v-show="showLogoutNav" @click="closeLogout" href="#" class="create-account">Sign Out, {{ this.firstName }}</a>
       </div>
     </div>
-
-  <div id="sign-up-modal" class="modalDialog">
-    
-    	<div>
-        <a href="#close" title="Close" class="close">X</a>
-
-
-        <Login />
-      </div>
-  </div>  
-
-
-  <div id="login-modal" class="modalDialog">
-    
-    	<div>
-        <a href="#close" title="Close" class="close">X</a>
-
-        
-        <SignUp />
-      </div>
-  </div>  
-
-
-  </div>
+    <div class="sign-in">
+      <Login v-show="signInVisible" @close="closeSignInBtn" @closeX="closeSignIn" v-if="signInVisible"></Login>
+    </div>
+    <div class="create-user">
+      <CreateUser v-show="createUserVisible" @close="closeCreateUser" @closeX="closeCreateUser" v-if="createUserVisible"></CreateUser>
+    </div>
+  </div> 
 </template>
 
 <script>
-  import SignUp from './sign-up.vue'
-  import Login from './login.vue'
+
+  import Login from './sign-in.vue'
+  import CreateUser from './sign-up.vue'
+  import bus from '../eventBus.js'
+  
   export default {
     name: 'navbar',
+    data() {
+      return {
+        signInVisible: false,
+        createUserVisible: false,
+        showSignInNav: true,
+        showCreateNav: true,
+        showLogoutNav: false,
+        firstName: ''
+      }
+    },
+    mounted() {
+      bus.$on('firstName', (firstName) => {
+        this.firstName = firstName
+      })
+    },
+    methods: {
+      showSignIn() {
+        this.signInVisible = true
+      },
+      closeSignIn() {
+        this.signInVisible = false
+      },
+      closeSignInBtn() {
+        this.signInVisible = false
+        this.showSignInNav = false
+        this.showCreateNav= false
+        this.showLogoutNav = true
+      },
+      showCreateUser() {
+        this.createUserVisible = true
+      },
+      closeCreateUser() {
+        this.createUserVisible = false
+      },
+      closeCreateUserBtn() {
+        this.signInVisible = false
+        this.showSignInNav = false
+        this.showCreateNav= false
+        this.showLogoutNav = true
+      },
+      showLogout() {
+        this.showLogoutNav = true
+        this.showSignInNav = false
+        this.showCreateNav = false
+      },
+      closeLogout() {
+        this.showLogoutNav = false
+        this.showSignInNav = true
+        this.showCreateNav = true
+        this.firstName = ''
+      }
+    },
     components: {
-      SignUp,
-      Login
+      Login: Login,
+      CreateUser: CreateUser
     }
   }
 </script>
@@ -117,6 +155,7 @@
     font-size: $paragraph;
     color: $blue-primary;
     text-decoration: none;
+    margin-right: 15px;
   }
   
   .create-account::after {
@@ -130,90 +169,6 @@
 
   .create-account:hover::after {
     width: 100%;
-  }
-
-  .modalDialog {
-	position: fixed;
-	font-family: Arial, Helvetica, sans-serif;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	background: rgba(0,0,0,0.8);
-	z-index: 99999;
-	opacity:0;
-	-webkit-transition: opacity 400ms ease-in;
-	-moz-transition: opacity 400ms ease-in;
-	transition: opacity 400ms ease-in;
-	pointer-events: none;
-}
-
-.modalDialog:target {
-	opacity:1;
-	pointer-events: auto;
-}
-
-.modalDialog > div {
-	width: 700px;
-	position: relative;
-	margin: 10% auto;
-	padding: 5px 20px 13px 20px;
-	border-radius: 10px;
-	background: #fff;
-	background: -moz-linear-gradient(#fff, #999);
-	background: -webkit-linear-gradient(#fff, #999);
-	background: -o-linear-gradient(#fff, #999);
-}
-
-.close {
-	background: #606061;
-	color: #FFFFFF;
-	line-height: 25px;
-	position: absolute;
-	right: -12px;
-	text-align: center;
-	top: -10px;
-	width: 24px;
-	text-decoration: none;
-	font-weight: bold;
-	-webkit-border-radius: 12px;
-	-moz-border-radius: 12px;
-	border-radius: 12px;
-	-moz-box-shadow: 1px 1px 3px #000;
-	-webkit-box-shadow: 1px 1px 3px #000;
-	box-shadow: 1px 1px 3px #000;
-}
-
-.close:hover { background: #00d9ff; }
-  
-  @media screen and (max-width: 400px) {
-    
-    .nav-container {
-      padding-left: 20px;
-      padding-right: 20px;
-    }
-    
-    .brandmark {
-      height: $heading-4-size;
-      width: $heading-4-size;
-      margin-right: 9px;
-    }
-    
-    .logotype {
-      font-size: $heading-4-size;
-    }
-    
-    .nav-items {
-      font-size: $small-paragraph;
-    }
-    
-  }
-  
-  @media screen and (max-width: 1000px) {
-    .nav-container {
-      padding-left: 20px;
-      padding-right: 20px;
-    }
   }
   
 </style>

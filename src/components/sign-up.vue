@@ -1,43 +1,38 @@
 <template>
-<form v-on:submit.prevent="postSignUp" style="border:1px solid #ccc" id="sign-up">
-  <div class="container">
-    <h1>Sign Up</h1>
-    <p>Please fill in this form to create an account.</p>
-    <hr>
-
-    <label for="first_name"><b>First Name</b></label>
-    <input type="text" placeholder="First Name" v-model="first_name" required>
-
-    <label for="last_name"><b>Last Name</b></label>
-    <input type="text" placeholder="Last Name" v-model="last_name" required>
-
-    <label for="zip_code"><b>Zip Code</b></label>
-    <input type="text" placeholder="Zip Code" v-model="zip_code" required>
-
-    <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" v-model="email" required>
-
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" v-model="psw" required>
-
-    <label for="psw2"><b>Re-Type Password</b></label>
-    <input type="password" placeholder="Enter Password" v-model="psw2" required>
-
-    <label for="party"><b>Party Affiliation</b></label>
-    <select v-model="party">
-      <option value="">Perfer Not to Say</option>
-      <option>Republican</option>
-      <option>Democrat</option>
-    </select>
-
-    <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
-
-    <div class="clearfix">
-      <button type="button" class="cancelbtn">Cancel</button>
-      <button type="submit" class="signupbtn">Sign Up</button>
+<transition name="modal-fade">
+  <div class="modal-backdrop">
+    <div class="modal">
+      <header class="modal-header" id="modalTitle">
+        <p class="header">
+          Create an Account
+        </p>
+        <button type="button" class="btn-close" @click="this.closeWithX">
+          x
+        </button>
+      </header>
+      <section class="modal-body" id="modalDescription">
+        <div class="body">
+          <form class="signup-form">
+            <div class="full-name">
+              <input v-model="first_name" type="text" id="fname" placeholder="First Name" required>
+              <input v-model="last_name" type="text" id="lname" placeholder="Last Name" required>
+            </div>
+            <div class="zip-and-email">
+              <input v-model="zip_code" type="text" id="zipcode" placeholder="Zip Code" required>
+              <input v-model="email" type="text" id="email-input" placeholder="Email" required>
+            </div> 
+            <div class="password">
+              <input v-model="psw" type="password" id="password-input" placeholder="Password" required>
+              <input v-model="psw2" type="password" id="password-confirm" placeholder="Re-Enter Password" required>
+            </div>
+            <button @click="postSignUp" type="button" id="sign-up">Create Account</button>
+            <button @click="this.closeWithX" type="button" id="cancel">Cancel</button>
+          </form>
+        </div>
+      </section>
     </div>
   </div>
-</form>
+</transition>
 </template>
  
 <script>
@@ -52,21 +47,284 @@ export default {
       email: "",
       psw: "",
       psw2: "",
-      party: "",
       zip_code: ""
     };
   },
   methods: {
+    close() {
+      this.$emit('close')
+    },
+    closeWithX() {
+      this.$emit('closeX')
+    },
     postSignUp: function() {
       console.log(this._data);
       if (this.psw != this.psw2) return "Passwords Don't Match";
       if (!/[A-Z]/.test(this.psw) || this.psw.length < 8 || !/[a-z]/.test(this.psw) || !/\d/.test(this.psw)) return "Password Must Contain at Least One Captial Letter, Lower Case Letter, a Number, and at least 8 characters long"
-      axios.post("/api/signup", this._data).then(res => console.log(res));
+      axios.post("/api/signup", this._data)
+           .then((res) => {
+             console.log('response', res)
+             this.first_name
+           });
+      
     }
   }
 };
 </script> 
 
-<style>
+<style lang="scss" scoped>
+
+  @import "../scss/components/normalize";
+  @import "../scss/components/_typography";
+  @import "../scss/components/_colors";
+  
+  .modal-backdrop {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .modal {
+    background: #FFFFFF;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    z-index: 999;
+  }
+
+  .modal-header {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .modal-header {
+    border-bottom: 1px solid #eeeeee;
+    
+    p {
+      color: $red-secondary;
+      font-family: $heading-font;
+      font-size: $heading-3-size;
+      font-weight: $heavy-weight;
+      text-align: center;
+      margin-right: 50px;
+    }
+  }
+  
+  .signup-form {
+    lost-column: 1/1;
+  }
+  
+  .full-name {
+    lost-flex-container: row;
+  }
+  
+  #fname {
+    lost-column: 1/2 flex;
+    box-sizing: border-box;
+    width: 100%;
+    border: 2px solid $blue-lightShade;
+    border-radius: 25px;
+    padding: 8px;
+    font-family: $primary-font;
+    font-size: $small-paragraph;
+    color: $blue-darkShade;
+    text-align: center;
+    outline: none;
+  }
+  
+  #fname:focus {
+    border: 2px solid $blue-darkestShade;
+    transition: border 0.3s;
+  }
+  
+  #lname {
+    lost-column: 1/2 flex;
+    box-sizing: border-box;
+    width: 100%;
+    border: 2px solid $blue-lightShade;
+    border-radius: 25px;
+    padding: 8px;
+    font-family: $primary-font;
+    font-size: $small-paragraph;
+    color: $blue-darkShade;
+    text-align: center;
+    outline: none;
+  }
+  
+  #lname:focus {
+    border: 2px solid $blue-darkestShade;
+    transition: border 0.3s;
+  }
+  
+  .zip-and-email {
+    lost-flex-container: row;
+  }
+  
+  #zipcode {
+    lost-column: 1/2 flex;
+    box-sizing: border-box;
+    width: 100%;
+    border: 2px solid $blue-lightShade;
+    border-radius: 25px;
+    padding: 8px;
+    font-family: $primary-font;
+    font-size: $small-paragraph;
+    color: $blue-darkShade;
+    text-align: center;
+    outline: none;
+    margin-top: 8px;
+  }
+  
+  #zipcode:focus {
+    border: 2px solid $blue-darkestShade;
+    transition: border 0.3s;
+  }
+  
+  #email-input {
+    lost-column: 1/2 flex;
+    box-sizing: border-box;
+    width: 100%;
+    border: 2px solid $blue-lightShade;
+    border-radius: 25px;
+    padding: 8px;
+    font-family: $primary-font;
+    font-size: $small-paragraph;
+    color: $blue-darkShade;
+    text-align: center;
+    outline: none;
+    margin-top: 8px;
+  }
+  
+  #email-input:focus {
+    border: 2px solid $blue-darkestShade;
+    transition: border 0.3s;
+  }
+  
+  .password {
+    lost-flex-container: row;
+  }
+  
+  #password-input {
+    lost-column: 1/2 flex;
+    box-sizing: border-box;
+    width: 100%;
+    border: 2px solid $blue-lightShade;
+    border-radius: 25px;
+    padding: 8px;
+    font-family: $primary-font;
+    font-size: $small-paragraph;
+    color: $blue-darkShade;
+    text-align: center;
+    outline: none;
+    margin-top: 8px;
+  }
+  
+  #password-input:focus {
+    border: 2px solid $blue-darkestShade;
+    transition: border 0.3s;
+  }
+    
+  #password-confirm {
+    lost-column: 1/2 flex;
+    box-sizing: border-box;
+    width: 100%;
+    border: 2px solid $blue-lightShade;
+    border-radius: 25px;
+    padding: 8px;
+    font-family: $primary-font;
+    font-size: $small-paragraph;
+    color: $blue-darkShade;
+    text-align: center;
+    outline: none;
+    margin-top: 8px;
+  }
+  
+  #password-confirm:focus {
+    border: 2px solid $blue-darkestShade;
+    transition: border 0.3s;
+  }
+  
+  #sign-up {
+    box-sizing: border-box;
+    color: $blue-primary;
+    background-color: transparent;
+    lost-column: 1/1 flex;
+    border: 1px solid $blue-primary;
+    border-radius: 25px;
+    padding: 2px;
+    font-family: $primary-font;
+    font-size: $small-paragraph;
+    outline: none;
+    margin-top: 25px;
+  }
+  
+  #sign-up:hover {
+    background-color: $blue-primary;
+    color: $white;
+    transition: background-color 0.3s;
+  }
+  
+  #cancel {
+    box-sizing: border-box;
+    color: $red-secondary;
+    background-color: transparent;
+    lost-column: 1/1 flex;
+    border: 1px solid $red-secondary;
+    border-radius: 25px;
+    padding: 2px;
+    font-family: $primary-font;
+    font-size: $small-paragraph;
+    outline: none;
+    margin-top: 8px;
+  }
+  
+  #cancel:hover {
+    background-color: $red-secondary;
+    color: $white;
+    transition: background-color 0.3s;
+  }
+  
+  .modal-body {
+    position: relative;
+    padding: 20px 10px;
+  }
+
+  .btn-close {
+    border: 2px solid $red-secondary;
+    border-radius: 100%;
+    font-size: $paragraph;
+    cursor: pointer;
+    color: $red-secondary;
+    width: 32px;
+    height: 32px;
+    background: $white;
+    outline: none;
+  }
+  
+  .btn-close:hover {
+    background-color: $red-secondary;
+    color: $white;
+    transition: background-color 0.5s;
+  }
+  
+  //animation
+  
+  .modal-fade-enter,
+  .modal-fade-leave-active {
+    opacity: 0;
+  }
+
+  .modal-fade-enter-active,
+  .modal-fade-leave-active {
+    transition: opacity .3s ease
+  }
   
 </style>
