@@ -54,7 +54,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 100vh;
+    height: 92.9vh;
     margin: 0;
     width: 100%;
   }
