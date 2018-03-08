@@ -15,7 +15,7 @@
       <Login v-show="signInVisible" @close="closeSignInBtn" @closeX="closeSignIn" v-if="signInVisible"></Login>
     </div>
     <div class="create-user">
-      <CreateUser v-show="createUserVisible" @close="closeCreateUser" v-if="createUserVisible"></CreateUser>
+      <CreateUser v-show="createUserVisible" @close="closeCreateUser" @closeX="closeCreateUser" v-if="createUserVisible"></CreateUser>
     </div>
   </div> 
 </template>
@@ -61,6 +61,12 @@
       },
       closeCreateUser() {
         this.createUserVisible = false
+      },
+      closeCreateUserBtn() {
+        this.signInVisible = false
+        this.showSignInNav = false
+        this.showCreateNav= false
+        this.showLogoutNav = true
       },
       showLogout() {
         this.showLogoutNav = true

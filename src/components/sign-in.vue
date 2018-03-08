@@ -52,7 +52,7 @@ export default {
       this.$emit('closeX')
     },
     userExist: function(response) {
-      if(response.status === 200) {
+      if(response.status === 200 && response.data !== 'User Not Found' ) {
         this.inDatabase = true
         const splitName = response.data.split(' ')
         this.firstName = splitName[0]

@@ -6,7 +6,7 @@
         <p class="header">
           Create an Account
         </p>
-        <button type="button" class="btn-close" @click="close">
+        <button type="button" class="btn-close" @click="this.closeWithX">
           x
         </button>
       </header>
@@ -26,7 +26,7 @@
               <input v-model="psw2" type="password" id="password-confirm" placeholder="Re-Enter Password" required>
             </div>
             <button @click="postSignUp" type="button" id="sign-up">Create Account</button>
-            <button @click="close" type="button" id="cancel">Cancel</button>
+            <button @click="this.closeWithX" type="button" id="cancel">Cancel</button>
           </form>
         </div>
       </section>
@@ -53,6 +53,9 @@ export default {
   methods: {
     close() {
       this.$emit('close')
+    },
+    closeWithX() {
+      this.$emit('closeX')
     },
     postSignUp: function() {
       console.log(this._data);
