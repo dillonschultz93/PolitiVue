@@ -2,20 +2,35 @@
   <div id="jumbotron">
     <div class="jumbotron-container">
       <div class="text-container">
-        <h1 class="tagline">Hello!</h1>
+        <h1 v-if="!this.firstName" class="tagline">Hello!</h1>
+        <h1 v-if="this.firstName" class="tagline">Hello, {{ this.firstName }}!</h1>
       </div>
       <Searchbar />
     </div>
-  </div>
+  </div> 
 </template>
 
 <script>
 
   import Searchbar from './search-bar.vue'
+  import bus from '../eventBus.js'
   
   export default {
     components: {
       'Searchbar': Searchbar
+    },
+    data() {
+      return {
+        firstName: ''
+      }
+    },
+    methods: {
+      
+    },
+    mounted() {
+      bus.$on('firstName', (firstName) => {
+        this.firstName = firstName
+      })
     },
     name: 'jumbotron'
   }
@@ -55,21 +70,9 @@
   .tagline {
     color: $red-darkShade;
     font-family: $heading-font;
-    font-size: 7em;
+    font-size: 5em;
     line-height: $primary-leading;
     margin-bottom: 10px;
-    opacity: 0.75;
-    text-align: center;
-  }
-  
-  .subtagline {
-    color: $blue-darkestShade;
-    font-family: $heading-font;
-    font-size: $heading-3-size;
-    font-weight: $primary-weight;
-    line-height: $primary-leading;
-    margin-top: 10px;
-    opacity: 0.75;
     text-align: center;
   }
   
