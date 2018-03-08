@@ -65,8 +65,7 @@
         independent: 'independent',
         demBorder: 'dem-border',
         repubBorder: 'repub-border',
-        indepenBorder: 'indepen-border',
-        animate: false
+        indepenBorder: 'indepen-border'
       }
     },
     methods: {
@@ -129,9 +128,8 @@
                         .officials[officialIndex]
                         .channels
         }
-        this.animate = true
         bus.$emit('seletedOfficial', seletedOfficial)
-        bus.$emit('animation', this.animate)
+        bus.$emit('address', seletedOfficial)
       }
     }
   }
