@@ -1,17 +1,16 @@
 const federal = require("./federalAPI.js")
+const news = require("./news.js")
 
 const api = {
   federal: {
-    getHome: function () {
-      return federal.getUSArepsForHome()
-    },
 
     getRepsByZip: function (zip) {
       return federal.getRepsByZipcode(zip)
-    },
-    
-    getElections: function () {
-      return federal.getUpcomingElections()
+    }
+  },
+  news: {
+    getNews: function(search) {
+      return news.getNews(search)
     }
   }
 
