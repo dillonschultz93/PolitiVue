@@ -6,7 +6,7 @@
           <p class="header">
             Sign In to Your Account
           </p>
-          <button type="button" class="btn-close" @click="close">
+          <button type="button" class="btn-close" @click="this.closeWithX">
             x
           </button>
         </header>
@@ -47,6 +47,9 @@ export default {
   methods: {
     close() {
       this.$emit('close');
+    },
+    closeWithX() {
+      this.$emit('closeX')
     },
     userExist: function(response) {
       if(response.status === 200) {
