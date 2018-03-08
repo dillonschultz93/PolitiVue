@@ -1,7 +1,7 @@
 <template>
   <div id="search-bar">
     <div class="input-container">
-      <input id="zip-code" v-model="address" :placeholder='placeholder'>
+      <input id="zip-code" v-on:keyup.enter="getReps" v-model="address" :placeholder='placeholder'>
       <button v-on:click="getReps" id="search-zip" type="button">
         <img src="../assets/search.svg" class="search-icon">
       </button>
