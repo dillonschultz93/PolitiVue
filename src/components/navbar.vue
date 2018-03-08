@@ -21,154 +21,191 @@
 </template>
 
 <script>
+import Login from "./sign-in.vue";
+import CreateUser from "./sign-up.vue";
+import bus from "../eventBus.js";
+import axios from "axios"
 
-  import Login from './sign-in.vue'
-  import CreateUser from './sign-up.vue'
-  import bus from '../eventBus.js'
-  
-  export default {
-    name: 'navbar',
-    data() {
-      return {
-        signInVisible: false,
-        createUserVisible: false,
-        showSignInNav: true,
-        showCreateNav: true,
-        showLogoutNav: false,
-        firstName: ''
+
+export default {
+  name: "navbar",
+  data() {
+    return {
+      signInVisible: false,
+      createUserVisible: false,
+      showSignInNav: true,
+      showCreateNav: true,
+      showLogoutNav: false,
+      firstName: ""
+    };
+  },
+  methods: {
+    userExist: function(response, context) {
+      if (
+        response.status === 200 &&
+        response.data !== "User Not Found" &&
+        response.data !== "Password Incorrect"
+      ) {
+        context.inDatabase = true;
+        var splitName = response.data.split(" ");
+        this.firstName = splitName[0];
+        bus.$emit("firstName", this.firstName);
+        console.log("name to be passed", this.firstName);
+        this.showLogout()
+        context.close();
+      } else {
+        context.inDatabase = false;
       }
     },
-    mounted() {
-      bus.$on('firstName', (firstName) => {
-        this.firstName = firstName
-      })
+    postSignIn: function(context) {
+      axios
+        .post("/api/signin", { email: context.email, psw: context.psw })
+        .then(res => {
+          console.log("response", res);
+          this.userExist(res, context);
+          console.log("Logged in", context.inDatabase);
+        });
     },
-    methods: {
-      showSignIn() {
-        this.signInVisible = true
-      },
-      closeSignIn() {
-        this.signInVisible = false
-      },
-      closeSignInBtn() {
-        this.signInVisible = false
-        this.showSignInNav = false
-        this.showCreateNav= false
-        this.showLogoutNav = true
-      },
-      showCreateUser() {
-        this.createUserVisible = true
-      },
-      closeCreateUser() {
-        this.createUserVisible = false
-      },
-      closeCreateUserBtn() {
-        this.signInVisible = false
-        this.showSignInNav = false
-        this.showCreateNav= false
-        this.showLogoutNav = true
-      },
-      showLogout() {
-        this.showLogoutNav = true
-        this.showSignInNav = false
-        this.showCreateNav = false
-      },
-      closeLogout() {
-        this.showLogoutNav = false
-        this.showSignInNav = true
-        this.showCreateNav = true
-        this.firstName = ''
-      }
+    postSignUp: function(context) {
+      if (context.psw != context.psw2) return "Passwords Don't Match";
+      if (
+        !/[A-Z]/.test(context.psw) ||
+        context.psw.length < 8 ||
+        !/[a-z]/.test(context.psw) ||
+        !/\d/.test(context.psw)
+      )
+        return "Password Must Contain at Least One Captial Letter, Lower Case Letter, a Number, and at least 8 characters long";
+      axios.post("/api/signup", context._data).then(res => {
+        console.log("User Registered")
+        this.postSignIn(context);
+      });
     },
-    components: {
-      Login: Login,
-      CreateUser: CreateUser
+
+    showSignIn() {
+      this.signInVisible = true;
+    },
+    closeSignIn() {
+      this.signInVisible = false;
+    },
+    closeSignInBtn() {
+      this.signInVisible = false;
+      this.showSignInNav = false;
+      this.showCreateNav = false;
+      this.showLogoutNav = true;
+    },
+    showCreateUser() {
+      this.createUserVisible = true;
+    },
+    closeCreateUser() {
+      this.createUserVisible = false;
+    },
+    closeCreateUserBtn() {
+      this.signInVisible = false;
+      this.showSignInNav = false;
+      this.showCreateNav = false;
+      this.showLogoutNav = true;
+    },
+    showLogout() {
+      this.showLogoutNav = true;
+      this.showSignInNav = false;
+      this.showCreateNav = false;
+    },
+    closeLogout() {
+      this.showLogoutNav = false;
+      this.showSignInNav = true;
+      this.showCreateNav = true;
+      this.firstName = "";
+      bus.$emit("firstName", this.firstName);
     }
+  },
+  components: {
+    Login: Login,
+    CreateUser: CreateUser
   }
+};
 </script>
 
 <style lang="scss">
-  @import "../scss/components/normalize";
-  @import "../scss/components/_typography";
-  @import "../scss/components/_colors";
+@import "../scss/components/normalize";
+@import "../scss/components/_typography";
+@import "../scss/components/_colors";
 
-  #navbar {
-    border-bottom: 2px solid $red-secondary;
-    height: 58px;
-    width: 100%;
-  }
-  
-  .nav-container {
-    align-items: center;
-    display: flex;
-    lost-center: 980px 0 flex;
-    height: 58px;
-    justify-content: space-between;
-  }
-  
-  .brand {
-    align-items: center;
-    display: flex;
-  }
-  
-  .brandmark {
-    width: $heading-3-size;
-    height: $heading-3-size;
-    margin-right: 15px;
-  }
-  
-  .logotype {
-    color: $blue-primary;
-    font-family: $heading-font;
-    font-size: $heading-3-size;
-    margin: 0;
-  }
-  
-  .nav-items {
-    display: flex;
-    flex-direction: row;
-  }
-  
-  .sign-in {
-    font-family: $primary-font;
-    font-size: $paragraph;
-    color: $blue-primary;
-    text-decoration: none;
-    margin-right: 15px;
-  }
-  
-  .sign-in::after {
-    content: '';
-    display: block;
-    width: 0;
-    height: 2px;
-    background: $red-secondary;
-    transition: width .3s;
-  }
+#navbar {
+  border-bottom: 2px solid $red-secondary;
+  height: 58px;
+  width: 100%;
+}
 
-  .sign-in:hover::after {
-    width: 100%;
-  }
-  
-  .create-account {
-    font-family: $primary-font;
-    font-size: $paragraph;
-    color: $blue-primary;
-    text-decoration: none;
-    margin-right: 15px;
-  }
-  
-  .create-account::after {
-    content: '';
-    display: block;
-    width: 0;
-    height: 2px;
-    background: $red-secondary;
-    transition: width .3s;
-  }
+.nav-container {
+  align-items: center;
+  display: flex;
+  lost-center: 980px 0 flex;
+  height: 58px;
+  justify-content: space-between;
+}
 
-  .create-account:hover::after {
-    width: 100%;
-  }
-  
+.brand {
+  align-items: center;
+  display: flex;
+}
+
+.brandmark {
+  width: $heading-3-size;
+  height: $heading-3-size;
+  margin-right: 15px;
+}
+
+.logotype {
+  color: $blue-primary;
+  font-family: $heading-font;
+  font-size: $heading-3-size;
+  margin: 0;
+}
+
+.nav-items {
+  display: flex;
+  flex-direction: row;
+}
+
+.sign-in {
+  font-family: $primary-font;
+  font-size: $paragraph;
+  color: $blue-primary;
+  text-decoration: none;
+  margin-right: 15px;
+}
+
+.sign-in::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  background: $red-secondary;
+  transition: width 0.3s;
+}
+
+.sign-in:hover::after {
+  width: 100%;
+}
+
+.create-account {
+  font-family: $primary-font;
+  font-size: $paragraph;
+  color: $blue-primary;
+  text-decoration: none;
+  margin-right: 15px;
+}
+
+.create-account::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  background: $red-secondary;
+  transition: width 0.3s;
+}
+
+.create-account:hover::after {
+  width: 100%;
+}
 </style>

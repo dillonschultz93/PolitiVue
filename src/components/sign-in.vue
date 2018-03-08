@@ -51,27 +51,8 @@ export default {
     closeWithX() {
       this.$emit('closeX')
     },
-    userExist: function(response) {
-      if(response.status === 200 && response.data !== 'User Not Found' && response.data !== 'Password Incorrect') {
-        this.inDatabase = true
-        const splitName = response.data.split(' ')
-        this.firstName = splitName[0]
-        bus.$emit('firstName', this.firstName)
-        console.log('name to be passed', this.firstName)
-        this.close()
-        
-      } else {
-        this.inDatabase = false
-      }
-    },
-    postSignIn: function() {
-      console.log(this._data);
-      axios.post("/api/signin", this._data)
-           .then((res) => {
-             console.log('response', res)
-             this.userExist(res)
-             console.log('Logged in', this.inDatabase)
-           })
+    postSignIn: function () {
+      this.$parent.postSignIn(this)
     }
   }
 }
