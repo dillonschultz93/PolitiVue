@@ -10,7 +10,7 @@ router.get("/api", (req, res) => {
     res.json(results.data)
   }).catch(err => {
     console.error(err)
-  })
+  }) 
 })
 
 router.get("/api/:zip", (req, res) => {
@@ -63,7 +63,7 @@ router.post('/api/signin', (req, res) => {
     console.log(user)
     if(!user) return res.send("User Not Found")
     else if (bcrypt.compareSync(req.body.psw, user.password)) {
-      res.send("You are signed in")
+      res.send(user.full_name)
     }
     else {
       res.send("Password Incorrect")
