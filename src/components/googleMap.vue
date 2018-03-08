@@ -12,15 +12,19 @@ export default {
       returnedAddress: "",
       mapName: this.name + "-map",
       markerCoordinates: [{
-          latitude: 32.2217,
-          longitude: -110.9265
+          latitude: null,
+          longitude: null
         }],
       map: null,
       bounds: null,
-      markers: []
+      markers: [],
+      address: ''
     }
   },
   mounted: function () {
+    bus.$on('location', (location) => {
+      this.address = location
+    })
     this.bounds = new google.maps.LatLngBounds();
     const element = document.getElementById(this.mapName)
     const mapCentre = this.markerCoordinates[0]
@@ -37,12 +41,18 @@ export default {
     this.markers.push(marker)
       this.map.fitBounds(this.bounds.extend(position))
     });
+    const geocoder = new google.maps.Geocoder()
+    const address = this.address
+    geocoder.geocode({ 'address': address }, (results, status) => {
+      if(status == google.maps.GeocoderStatus.OK) {
+        const lat = results[0].geometry.location.latitude
+        const lng = results[0].geometry.location.longitude
+        this.markerCoordinates[0].latitude = lat
+        this.markerCoordinates[0].longitude = lng
+      }
+    })
   }
 };
-
-    bus.$on("location", (location) => {
-      this.returnedAddress = location
-    })
 
 //     var geocoder = new google.maps.Geocoder();
 //     var address = this.returnedAddress;
