@@ -12,36 +12,22 @@ export default {
       returnedAddress: "",
       mapName: this.name + "-map",
       markerCoordinates: [{
-          latitude: null,
-          longitude: null
+          latitude: 38.8977,
+          longitude: -77.0365
         }],
       map: null,
       bounds: null,
       markers: [],
-      address: ''
+      address: this.$parent.seletedOfficial.address
     }
   },
-  mounted: function () {
-    console.log(bus)
-    bus.$on('address', (seletedOfficial) => {
-      this.address = seletedOfficial
-      console.log('address official', JSON.stringify(this.seletedOfficial, null, 2))
-    })
-    
-    const geocoder = new google.maps.Geocoder()
-    const address = this.address
-    geocoder.geocode({ 'address': address }, (results, status) => {
-      if(status == google.maps.GeocoderStatus.OK) {
-        const lat = results[0].geometry.location.latitude
-        const lng = results[0].geometry.location.longitude
-        this.markerCoordinates[0].latitude = lat
-        this.markerCoordinates[0].longitude = lng
-      }
-    })
-    this.bounds = new google.maps.LatLngBounds();
+  mounted () {
+  
+
     const element = document.getElementById(this.mapName)
     const mapCentre = this.markerCoordinates[0]
     const options = {
+      zoom: 10,
       center: new google.maps.LatLng(mapCentre.latitude, mapCentre.longitude)
     }
     this.map = new google.maps.Map(element, options);
@@ -52,7 +38,6 @@ export default {
         map: this.map
       });
     this.markers.push(marker)
-      this.map.fitBounds(this.bounds.extend(position))
     });
     
   }
