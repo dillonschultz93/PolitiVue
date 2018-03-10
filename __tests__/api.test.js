@@ -14,7 +14,7 @@ describe(
       })
       
       it('should return government official data', () => {
-        return federal.getRepsByZipcode(90210).then(response => {
+        return federal.getRepsByZipcode(85704).then(response => {
           expect(response.data.offices).toBeDefined()
           expect(response.data.officials).toBeDefined()
         })
