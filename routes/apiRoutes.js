@@ -32,7 +32,6 @@ router.post("/api/signup", (req, res) => {
         zipcode: req.body.zip_code,
         password: userPassword
       }).then(result => {
-        console.log(result)
         res.send("User Registered")
       })
     }
@@ -43,13 +42,11 @@ router.post("/api/signup", (req, res) => {
 })
 
 router.post('/api/signin', (req, res) => {
-  console.log(req.body)
   db.User.findOne({
     where: {
       email: req.body.email
     }
   }).then(user => {
-    console.log(user)
     if(!user) return res.send("User Not Found")
     else if (bcrypt.compareSync(req.body.psw, user.password)) {
       res.send(user.full_name)

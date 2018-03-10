@@ -89,7 +89,6 @@ export default {
   mounted() {
     bus.$on('seletedOfficial', (seletedOfficial) => {
       this.seletedOfficial = seletedOfficial
-      console.log('seleted official', JSON.stringify(this.seletedOfficial, null, 2))
     })
   }
 }

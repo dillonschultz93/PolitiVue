@@ -45,14 +45,12 @@
     mounted() {
       bus.$on('representatives', (representatives) => {
         this.representatives = representatives
-        console.log('representatives', 
           JSON.stringify(
             this.representatives, null, 2)
           )
       }),
       bus.$on('location', (parsedAddress) => {
         this.location = `Your representatives in ${parsedAddress.location}`
-        console.log('location', this.location)
       })
     },
     data() {

@@ -50,7 +50,6 @@ export default {
         var splitName = response.data.split(" ");
         this.firstName = splitName[0];
         bus.$emit("firstName", this.firstName);
-        console.log("name to be passed", this.firstName);
         this.showLogout()
         context.close();
       } else {
@@ -61,9 +60,7 @@ export default {
       axios
         .post("/api/signin", { email: context.email, psw: context.psw })
         .then(res => {
-          console.log("response", res);
           this.userExist(res, context);
-          console.log("Logged in", context.inDatabase);
         });
     },
     postSignUp: function(context) {
@@ -76,7 +73,6 @@ export default {
       )
         return "Password Must Contain at Least One Captial Letter, Lower Case Letter, a Number, and at least 8 characters long";
       axios.post("/api/signup", context._data).then(res => {
-        console.log("User Registered")
         this.postSignIn(context);
       });
     },

@@ -25,7 +25,6 @@ export default {
   },
   mounted() {
     bus.$on('seletedOfficial', (seletedOfficial) => {
-      console.log(seletedOfficial.address)
       this.markers[0].setMap(null);
       this.markers = []
       this.address = seletedOfficial.address
@@ -45,7 +44,6 @@ export default {
       
       var geocoder = new google.maps.Geocoder();
       var address = this.address;
-      console.log(address);
       geocoder.geocode({ address: address }, (results, status) => {
         if (status == "OK") {
           this.map.setCenter(results[0].geometry.location);
