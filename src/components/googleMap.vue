@@ -26,6 +26,8 @@ export default {
   mounted() {
     bus.$on('seletedOfficial', (seletedOfficial) => {
       console.log(seletedOfficial.address)
+      this.markers[0].setMap(null);
+      this.markers = []
       this.address = seletedOfficial.address
       this.updateMap()
     })
@@ -40,6 +42,7 @@ export default {
   },
   methods: {
     updateMap: function() {
+      
       var geocoder = new google.maps.Geocoder();
       var address = this.address;
       console.log(address);
@@ -50,12 +53,14 @@ export default {
             map: this.map,
             position: results[0].geometry.location
           });
+          this.markers.push(marker)
         } else {
           alert(
             "Geocode was not successful for the following reason: " + status
           );
         }
       });
+
     }
   },
 };
