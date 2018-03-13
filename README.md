@@ -2,7 +2,7 @@
 
 ![picture alt](./src/assets/readme-header.png)
 
-> PolitiVue is a simple app that displays local and federal government officials.  
+> PolitiVue is a simple app that displays local and federal government officials, their party affiliation, contact information, social media accounts, and where their offices are located.  
 
 ## Build Setup
 
