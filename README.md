@@ -1,4 +1,6 @@
-# politivue
+# PolitiVue
+
+![picture alt](./src/assets/readme-header.png)
 
 > A Vue.js project
 
