@@ -19,7 +19,7 @@ around the internet and display it in a clear and simple way.
 We have built a simple account creation tool that stores the user's name, email,
 zip code, and a password that is validated and encrypted.
 
-![](./src/assets/sign-up.gif =150x)  
+![](./src/assets/sign-up.gif)  
 
 
 ## Installing
