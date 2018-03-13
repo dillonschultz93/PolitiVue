@@ -42,8 +42,8 @@ Front-End Tools:
 
 Back-End Tools:
 * [Node.js](https://nodejs.org/en/): used for server-side scripting
-* [Express](https://expressjs.com/): used to as our server
-* [MySQL](https://www.mysql.com/): used to as our database
+* [Express](https://expressjs.com/): used as our server
+* [MySQL](https://www.mysql.com/): used as our database
 * [Sequelize](http://docs.sequelizejs.com/): used as our ORM
 * [Jest](https://facebook.github.io/jest/): used for testing
 * [Google Civic Information API](https://developers.google.com/civic-information/): API used for government official data
