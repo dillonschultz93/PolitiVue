@@ -1,6 +1,6 @@
 # PolitiVue
 
-![](./src/assets/readme-header.png)
+![header](./src/assets/readme-header.png)
 
 PolitiVue is a simple app that displays local and federal government officials, 
 their party affiliation, contact information, social media accounts, and where 
@@ -19,7 +19,16 @@ around the internet and display it in a clear and simple way.
 We have built a simple account creation tool that stores the user's name, email,
 zip code, and a password that is validated and encrypted.
 
-![](./src/assets/sign-up.gif)  
+![sign up gif](./src/assets/sign-up.gif)  
+
+The only input required by the user is their zip code.
+
+![search gif](./src/assets/search.gif)
+
+The list of government officials are the user's representatives for their area.
+Clicking on an official displays more information about them on the right.
+
+![select gif](./src/assets/select.gif)
 
 
 ## Installing
