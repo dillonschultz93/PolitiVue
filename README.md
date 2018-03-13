@@ -2,7 +2,7 @@
 
 ![picture alt](./src/assets/readme-header.png)
 
-> A Vue.js project
+> PolitiVue is a simple app that displays local and federal government officials.  
 
 ## Build Setup
 
