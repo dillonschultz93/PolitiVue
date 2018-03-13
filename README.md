@@ -30,8 +30,32 @@ Clicking on an official displays more information about them on the right.
 
 ![select gif](./src/assets/select.gif)
 
+## Tools Used
+
+Front-End Tools: 
+* [Sketch 3](https://www.sketchapp.com/): used for wireframing and mockups
+* [Vue.js](https://vuejs.org/v2/guide/): framework for building out the app
+* [PostCSS](http://postcss.org/): tool for transforming CSS styles with JS plugins
+* [Lost Grid](http://lostgrid.org/): PostCSS plugin to easily create layouts
+* [SASS](https://sass-lang.com/): used to modularize CSS styles
+* [Webpack](https://webpack.js.org/): used to bundle our modules and assets
+
+Back-End Tools:
+* [Node.js](https://nodejs.org/en/): used for server-side scripting
+* [Express](https://expressjs.com/): used to as our server
+* [MySQL](https://www.mysql.com/): used to as our database
+* [Sequelize](http://docs.sequelizejs.com/): used to as our ORM
+* [Jest](https://facebook.github.io/jest/): used for testing
+* [Google Civic Information API](https://developers.google.com/civic-information/): API used for government official data
+
+## Deployed Version
+
+You can view a [deployed version here](https://politivue.herokuapp.com/)
+
 
 ## Installing
+
+You can run this app locally by following these steps:
 
 ``` bash
 # install dependencies
@@ -43,6 +67,3 @@ npm run dev
 # build for production with minification
 npm run production
 ```
-
-For detailed explanation on how things work, consult the 
-[docs for vue-loader](http://vuejs.github.io/vue-loader).
