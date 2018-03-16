@@ -39,6 +39,8 @@ Front-End Tools:
 * [Lost Grid](http://lostgrid.org/): PostCSS plugin to easily create layouts
 * [SASS](https://sass-lang.com/): used to modularize CSS styles
 * [Webpack](https://webpack.js.org/): used to bundle our modules and assets
+* [Google Map API](https://developers.google.com/maps/): API used for the map component
+* [Geocoder API](https://developers.google.com/maps/documentation/geocoding/intro): API used for displaying official's address
 
 Back-End Tools:
 * [Node.js](https://nodejs.org/en/): used for server-side scripting
